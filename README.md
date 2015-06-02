@@ -1,2 +1,2 @@
 # gvm
-Graph Virtual 
+Graph Virtual Machine
