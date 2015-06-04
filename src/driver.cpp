@@ -1,3 +1,9 @@
+// Graph Virtual Machine
+// This project will extend nauty by creating an language to interact with graphs easily.
+// Dr. Nicholas Richardson
+
+
+
 #define _CRT_SECURE_NO_DEPRECATE
 
 #include <string>
@@ -6,6 +12,7 @@
 using namespace std;
 
 #include "Scanner.h"
+
 
 void Get_Build_Number();
 

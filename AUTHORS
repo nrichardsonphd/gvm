@@ -1,7 +1,13 @@
+GVM
+	Dr. Nicholas M. Richardson
+
+
+
+Project is an extension of nauty.
+This will provide a language to easily manipulate graphs.
+*******************
 nauty and traces
 	Dr. Brendan McKay
 	Dr. Adolfo Piperno
 
-GVM
 
-	Dr. Nicholas M. Richardson

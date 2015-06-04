@@ -66,9 +66,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\src\driver.cpp" />
     <ClCompile Include="..\..\..\src\interpreter\Scanner.cpp" />
     <ClCompile Include="..\..\..\src\interpreter\Tokens.cpp" />
-    <ClCompile Include="driver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\interpreter\Token_Keywords.h" />

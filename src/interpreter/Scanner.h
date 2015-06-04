@@ -1,6 +1,6 @@
 #ifndef SCANNER_H
 #define SCANNER_H
-
+#define _CRT_SECURE_NO_DEPRECATE
 #include <stdio.h>
 #include <iostream>
 using namespace std;

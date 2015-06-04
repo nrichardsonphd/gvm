@@ -1,9 +1,12 @@
 // This file will contain all the tokens needed for the Graph Virtual Machine Language
-
-// General programming tokens
-// set theory tokens
-// graph theory tokens
-// operators
+// To add a new token,
+	// 1. If a literal is needed add literal to Token_Literals.h *_TOK_LIT
+	// 2. If it is a keyword, add to Token_Keywords.h *_TOK_KW
+	// 3. Add token in appropriate section with an appropriate number *_TOK
+	// 4. Add case to Display Tokens in Tokens.cpp
+	// 5. Add token to src/tests/tokens.gvm to be tested
+	// 6. Confirm Scanner captures token with Scanner::Test_Tokens
+	// 7. Update parser for new token
 
 #include <iostream>
 using namespace std;
