@@ -1,0 +1,34 @@
+#include "Scanner.h"
+
+
+Scanner::Scanner()
+{
+
+}
+
+
+Scanner::~Scanner()
+{
+
+}
+
+bool Scanner::Scan_File( string filename )
+{
+	FILE *fp;
+
+	if ( fp = fopen( filename.c_str(), "r" ) )
+	{
+		cout << "Testing to get tokens" << endl;
+
+	}
+	else
+	{
+		cout << "Unable To find test file." << endl;
+		return false;
+	}
+}
+
+bool Scanner::Test_Tokens( bool detailed )
+{	
+	return this->Scan_File("./src/tests/tokens.gvm");
+}

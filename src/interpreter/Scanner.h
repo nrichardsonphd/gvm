@@ -1,7 +1,10 @@
 #ifndef SCANNER_H
 #define SCANNER_H
+
 #define _CRT_SECURE_NO_DEPRECATE
+
 #include <stdio.h>
+#include <string>
 #include <iostream>
 using namespace std;
 
@@ -16,6 +19,7 @@ class Scanner
 		~Scanner();
 
 		bool Scan_File( string filename );		// initialize file to scan, will close any open file
+		void Close_File();
 		int Get_Next_Token();					// call to get the next token in file
 		
 
@@ -30,6 +34,8 @@ class Scanner
 		char last_char;					// stores last character read
 
 		string token;
+		
+		bool detail;
 };
 
 #endif // SCANNER_H

@@ -182,3 +182,6 @@ using namespace std;
 #define INTEGER_LITERAL_TOK					603		// an integer coded in
 #define REAL_LITERAL_TOK					604		// a real number coded in
 #define STRING_LITERAL_TOK					605		// a string, within quotions coded in
+
+
+#define TOK_ERR								1001	// error token
