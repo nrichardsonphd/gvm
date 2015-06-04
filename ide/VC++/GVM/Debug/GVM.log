@@ -1,2 +1,5 @@
-﻿  driver.cpp
+﻿  Tokens.cpp
+  Scanner.cpp
+  driver.cpp
+  Generating Code...
   GVM.vcxproj -> C:\Users\richardsonn\Documents\GitHub\gvm\ide\VC++\Debug\GVM.exe

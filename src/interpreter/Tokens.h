@@ -177,8 +177,8 @@ using namespace std;
 ////////////////////
 // Literal Tokens //
 ////////////////////
-#define IDENTIFIER_TOK						601
-#define KEYWORD_TOK							602
-#define INTEGER_LITERAL_TOK					603
-#define REAL_LITERAL_TOK					604
-#define STRING_LITERAL_TOK					605
+#define IDENTIFIER_TOK						601		// identify a name
+#define KEYWORD_TOK							602		// change from id tok if it is a keyword
+#define INTEGER_LITERAL_TOK					603		// an integer coded in
+#define REAL_LITERAL_TOK					604		// a real number coded in
+#define STRING_LITERAL_TOK					605		// a string, within quotions coded in
