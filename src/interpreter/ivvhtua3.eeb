@@ -1,0 +1,19 @@
+#include "Scanner.h"
+
+
+Scanner::Scanner()
+{
+
+}
+
+
+Scanner::~Scanner()
+{
+
+}
+
+bool Scanner::Test_Tokens()
+{
+	cout << "Testing to get tokens";
+	return true;
+}

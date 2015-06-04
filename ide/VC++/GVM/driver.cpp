@@ -15,6 +15,10 @@ int main()
 	cout << "Graph Virtual Machine\t";
 	Get_Build_Number();
 	cout << "Dr. Nicholas Richardson" << endl;
+
+	Scanner s;
+	s.Test_Tokens(true);
+
 	return 0;
 }
 
@@ -25,7 +29,7 @@ void Get_Build_Number()
 	char *build_number = new char[128];
 	
 
-	if ( fp = fopen( "./../../../.git/refs/heads/master", "r" ) )
+	if ( fp = fopen( "./.git/refs/heads/master", "r" ) )
 	{
 		fgets( build_number, 128, fp );
 		fclose( fp );
