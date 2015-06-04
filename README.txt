@@ -1,2 +1,0 @@
-# gvm
-Graph Virtual Machine
