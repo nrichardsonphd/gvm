@@ -4,7 +4,7 @@
 #define PLUS_TOK_LIT							'+'
 #define DASH_TOK_LIT							'-'
 #define SLASH_TOK_LIT							'/'
-#define BACKSLASH_TOK_LIT						'\'
+#define BACKSLASH_TOK_LIT						'\\'
 #define STAR_TOK_LIT							'*'
 #define EQUAL_TOK_LIT							'='
 
@@ -47,7 +47,7 @@
 #define LESS_GREATER_TOK_LIT					"<>"
 #define GREATER_LESS_TOK_LIT					"><"
 #define BACKSLASH_SLASH_TOK_LIT					"\\/"
-#define SLASH_BACKSLASH_TOK_LIT					"/\"
+#define SLASH_BACKSLASH_TOK_LIT					"/\\"
 #define GREATER_GREATER_TOK_LIT					">>"
 #define LESS_LESS_TOK_LIT						"<<"
 #define STAR_STAR_TOK_LIT						"**"
