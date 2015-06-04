@@ -46,7 +46,7 @@
 #define GREATER_EQUAL_TOK_LIT					">="
 #define LESS_GREATER_TOK_LIT					"<>"
 #define GREATER_LESS_TOK_LIT					"><"
-#define BACKSLASH_SLASH_TOK_LIT					"\/"
+#define BACKSLASH_SLASH_TOK_LIT					"\\/"
 #define SLASH_BACKSLASH_TOK_LIT					"/\"
 #define GREATER_GREATER_TOK_LIT					">>"
 #define LESS_LESS_TOK_LIT						"<<"
