@@ -13,15 +13,13 @@ using namespace std;
 
 #include "Scanner.h"
 
-
+void Title_Screen();
 void Get_Build_Number();
 
 
 int main()
 {
-	cout << "Graph Virtual Machine\t";
-	Get_Build_Number();
-	cout << "Dr. Nicholas Richardson" << endl;
+	Title_Screen();
 
 	Scanner s;
 	s.Test_Tokens(true);
@@ -29,6 +27,19 @@ int main()
 	return 0;
 }
 
+void Title_Screen()
+{
+	cout << "Graph Virtual Machine\t\t\t\t\tDr. Nicholas Richardson" << endl;
+	cout << string( 79, '=' ) << "\n"; 
+	
+	const char *ts = "Build date: " __DATE__ "\t\t\t   Build Time: " __TIMESTAMP__;
+	cout << ts << endl;
+	cout << "Build Hash ID: ";
+	Get_Build_Number( );
+	cout << endl;
+
+	cout << string(79,'=') << endl << endl;
+}
 
 void Get_Build_Number()
 {
@@ -46,6 +57,12 @@ void Get_Build_Number()
 		build_number = "000-00-0000";
 	}
 
+	int i = 0;
+
+	do
+	{
+		cout << build_number[i++];
+	}
+	while ( build_number[i] != '\n' );
 	
-	cout << "Build Number: " << build_number << endl;
 }
