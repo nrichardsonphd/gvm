@@ -5,6 +5,6 @@ using namespace std;
 
 int main()
 {
-
+	cout << PERCENT_TOK_LIT << endl;
 	return 0;
 }

@@ -2,6 +2,7 @@
 #define SCANNER_H
 
 #include "Tokens.h"
+#include "Token_Literals.h"
 
 class Scanner
 {

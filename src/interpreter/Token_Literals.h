@@ -11,7 +11,7 @@
 #define AT_TOK_LIT								'@'
 #define POUND_TOK_LIT							'#'
 #define DOLLAR_TOK_LIT							'$'
-#define PERCENT_TOK_LIT							'\%'
+#define PERCENT_TOK_LIT							'%'
 #define SEMICOLON_TOK_LIT						';'
 
 #define APOSTROPHE_TOK_LIT						'\''
@@ -56,7 +56,7 @@
 #define LESS_DASH_TOK_LIT						"<-"
 #define COLON_COLON_TOK_LIT						"::"
 #define COLON_EQUAL_TOK_LIT						":="
-#define EQUAL_TOK_LIT							"+="
+#define PLUS_EQUAL_TOK_LIT						"+="
 #define STAR_EQUAL_TOK_LIT						"*="
 #define DASH_EQUAL_TOK_LIT						"-="
 #define SLASH_EQUAL_TOK_LIT						"/="
@@ -115,7 +115,7 @@
 #define CLOSE_TOK_KW_LIT						"CLOSE"
 #define READ_TOK_KW_LIT							"READ"
 #define WRITE_TOK_KW_LIT						"WRITE"
-#define CLOSE_TOK_KW_LIT						"EOF"
+#define EOF_TOK_KW_LIT							"EOF"
 
 #define FUNCTION_TOK_KW_LIT						"FUNCTION"
 #define CALL_TOK_KW_LIT							"CALL"
