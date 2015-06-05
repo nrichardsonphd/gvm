@@ -10,7 +10,7 @@ using namespace std;
 
 
 #include "Tokens.h"
-#include "Token_Literals.h"
+
 
 class Scanner
 {
@@ -26,16 +26,14 @@ class Scanner
 		bool Test_Tokens( bool detailed );		// test with default file for all tokens defined
 												// detail=true for output of each token
 	private:
-		char Get_Next_Char( );				
-
+		void Get_Next_Char();
 
 
 		FILE *fp;						// pointer to file to scan
-		char last_char;					// stores last character read
-
-		string token;
 		
-		bool detail;
+		char next_char;
+		int token;
+		
 };
 
 #endif // SCANNER_H

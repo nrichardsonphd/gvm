@@ -3,9 +3,8 @@
 
 Scanner::Scanner()
 {
-	this->detail = false;
-	this->last_char = ' ';
-	this->token = "";
+	this->next_char = '\0';
+	this->token = 0;
 }
 
 
@@ -20,7 +19,8 @@ bool Scanner::Scan_File( string filename )
 
 	if ( fp = fopen( filename.c_str(), "r" ) )
 	{
-		token = this->Get_Next_Token();
+		this->Get_Next_Char();
+		return true;
 	}
 	else
 	{
@@ -31,19 +31,37 @@ bool Scanner::Scan_File( string filename )
 
 void Scanner::Close_File()
 {
+	this->next_char = '\0';
+	this->token = 0;
+
 	if ( fp )
 	{
 		fclose( fp );
 	}
 }
 
+void Scanner::Get_Next_Char()
+{
+	if ( fp )
+	{
+		next_char = fgetc( fp );
+	}
+}
+
 int Scanner::Get_Next_Token()
 {
+
+
+	
+	
 	return 0;
 }
 
 bool Scanner::Test_Tokens( bool detailed_output )
 {	
-	this->detail = detailed_output;
-	return this->Scan_File("./src/tests/tokens.gvm");
+	this->Scan_File("./src/tests/tokens.gvm");
+
+	
+
+	return true;
 }

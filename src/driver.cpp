@@ -29,7 +29,7 @@ int main()
 
 void Title_Screen()
 {
-	cout << "Graph Virtual Machine\t\t\t\t\tDr. Nicholas Richardson" << endl;
+	cout << "Graph Virtual Machine\t\t    GVM    \t\tDr. Nicholas Richardson" << endl;
 	cout << string( 79, '=' ) << "\n"; 
 	
 	const char *ts = "Build date: " __DATE__ "\t\t\t   Build Time: " __TIMESTAMP__;

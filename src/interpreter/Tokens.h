@@ -14,6 +14,13 @@ using namespace std;
 #include "Token_Literals.h"
 #include "Token_Keywords.h"
 
+
+//////////////////////////
+// Functions for tokens //
+//////////////////////////
+void Display_Token( int token );
+
+
 /////////////////////
 // Operator tokens //
 /////////////////////
