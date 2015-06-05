@@ -197,6 +197,7 @@ void Display_Token( int token );
 
 #define TOK_ERR								1001	// error token
 #define TOK_ERR_EOF							1002	// end of file for *.gvm
+#define TOK_COMMENT							1003	// token for a comment
 
 
 
