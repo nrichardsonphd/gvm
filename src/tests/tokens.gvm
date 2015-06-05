@@ -1,1 +1,48 @@
-+ - * /
+// this is a line comment that should not be seen
+some
+identifiers are here
+
+/* an inline comment*/
+
+/*/
+
+/*
+and
+a 
+block
+comment
+*/
+
+
+Strictly Single
+' " # $ % ( ) [ ] { } , . ; ? @ ^ _ ~
+
+	-			+
+	->			
+	-=			+=
+
+	*			!
+	**			
+	*=			!=
+
+	/		\
+	/*		block comment
+	/\		\/
+	/=		\=
+
+	:		=
+	::		=~
+	:=		==
+
+	|			&
+	||			&&
+
+	<			>
+	<-			
+	<<			>>
+	<<<			>>>
+	<<<=		>>>=
+	<<=			>>=
+	<=			>=
+	<>			><
+

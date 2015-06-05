@@ -36,7 +36,7 @@ class Scanner
 		
 		char next_char;
 		int token;
-		
+		string token_string;
 		
 };
 

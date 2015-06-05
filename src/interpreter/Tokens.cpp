@@ -5,6 +5,11 @@ void Display_Token( int token )
 {
 	switch ( token )
 	{
+		case TOK_ERR_EOF:	cout << "End of file token" << endl; break;
+		case TOK_IDENTIFIER: cout << "Identifier token" << endl; break;
+		case TOK_COMMENT: cout << "Comment token" << endl;
+
+
 		// Single Tokens
 		case PLUS_TOK: cout << PLUS_TOK_LIT << endl; break; 
 		case DASH_TOK: cout << DASH_TOK_LIT << endl; break;
@@ -56,6 +61,7 @@ void Display_Token( int token )
 		case LESS_LESS_TOK: cout << LESS_LESS_TOK_LIT << endl; break;
 		case STAR_STAR_TOK: cout << STAR_STAR_TOK_LIT << endl; break;
 		case PIPE_PIPE_TOK: cout << PIPE_PIPE_TOK_LIT << endl; break;
+		case AMPERSAND_AMPERSAND_TOK: cout << AMPERSAND_AMPERSAND_TOK_LIT << endl; break;
 		case DASH_GREATER_TOK: cout << DASH_GREATER_TOK_LIT << endl; break;
 		case LESS_DASH_TOK: cout << LESS_DASH_TOK_LIT << endl; break;
 		case COLON_COLON_TOK: cout << COLON_COLON_TOK_LIT << endl; break;

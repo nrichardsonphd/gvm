@@ -45,6 +45,8 @@ void Scanner::Get_Next_Char()
 	if ( this->fp )
 	{
 		this->next_char = fgetc( this->fp );
+		this->token_string += this->next_char;
+		
 	}
 }
 
@@ -52,15 +54,31 @@ int Scanner::Get_Next_Token()
 {
 	bool skip_char = false;
 	this->token = 0;
+	
+
+	do
+	{
+		this->token_string.clear();
+		skip_char = false;
+
+		switch ( this->next_char )
+		{
+			case '\t':
+			case '\r':
+			case '\n':
+			case ' ':
+				skip_char = true;
+				this->Get_Next_Char();
+				break;
+			default:
+				this->token_string += this->next_char;
+				break;
+		}
+	}
+	while ( skip_char );
 		
 	do
 	{
-		// get the next character after a comment
-		if ( skip_char )
-		{
-			this->Get_Next_Char();
-		}
-
 		skip_char = false;
 		
 		switch ( this->next_char )
@@ -108,7 +126,12 @@ int Scanner::Get_Next_Token()
 
 				// get another token if it is a comment
 				if ( this->token == TOK_COMMENT )
+				{
+					this->Get_Next_Char();
 					skip_char = true;
+					this->token_string.clear( );
+					this->token_string += this->next_char;
+				}
 				break;
 	
 			case '!':
@@ -238,23 +261,33 @@ int Scanner::Get_Next_Token()
 				break;
 
 
-			default:
-				this->token = TOK_ERR;
+			default:	
+				while ( ( this->next_char >= 'a' && this->next_char <= 'z' ) || ( this->next_char >= 'A' && this->next_char <= 'Z' ) )
+				{
+					this->Get_Next_Char();
+					this->token = TOK_IDENTIFIER;
+				}
+				//this->token = TOK_UNKNOWN;
 				break;
 		}
 
 		// do not get token if it is lead only of multi character token and already has it
 		// / is 1st of  // and /*; if only /, the next character is already in the buffer
-		//							/ \ * - = + : ! | < > &		single only	
-		if ( this->token != SLASH_TOK		&&this->token != BACKSLASH_TOK			&& this->token != STAR_TOK				&&
+		//							/ \ * - = + : ! | < > &		single only	, char in buffer
+		// <, <<, <<<, >, >>, >>> all have character in buffer
+		if ( this->token != SLASH_TOK		&& this->token != BACKSLASH_TOK			&& this->token != STAR_TOK				&&
 			 this->token != DASH_TOK		&& this->token != EQUAL_TOK				&& this->token != PLUS_TOK				&&
 			 this->token != COLON_TOK		&& this->token != BANG_TOK				&& this->token != PIPE_TOK				&&
-																					   this->token != AMPERSAND_TOK			&&
+			 this->token != TOK_IDENTIFIER	&&										   this->token != AMPERSAND_TOK			&&
 			 this->token != LESS_TOK		&& this->token != LESS_LESS_TOK			&& this->token != LESS_LESS_LESS_TOK	&&
 			 this->token != GREATER_TOK		&& this->token != GREATER_GREATER_TOK	&& this->token != GREATER_GREATER_GREATER_TOK
 			)
 		{
 			this->Get_Next_Char();
+		}
+		else
+		{
+			this->token_string.pop_back();
 		}
 
 		
@@ -385,8 +418,17 @@ void Scanner::Greater_Tokens()
 bool Scanner::Test_Tokens( bool detailed_output )
 {	
 	this->Scan_File("./src/tests/tokens.gvm");
+	int tk = 0;
+	int i = 0;
 
-	
+	do
+	{
+		tk = this->Get_Next_Token();
+
+		cout << "Token found " << ++i << ": " << this->token_string << " <" << tk << "> ";
+		Display_Token( tk );
+	}
+	while ( this->token != TOK_ERR_EOF );
 
 	return true;
 }
