@@ -62,6 +62,9 @@ void Display_Token( int token );
 #define OPEN_BRACE_TOK						154
 #define CLOSE_BRACE_TOK						155
 
+#define SLASH_STAR_TOK						160
+#define STAR_SLASH_TOK						161
+
 // Double Tokens
 #define BANG_EQUAL_TOK						201
 #define EQUAL_TILDE_TOK						202
@@ -76,16 +79,17 @@ void Display_Token( int token );
 #define LESS_LESS_TOK						211
 #define STAR_STAR_TOK						212
 #define PIPE_PIPE_TOK						213
-#define DASH_GREATER_TOK					214
-#define LESS_DASH_TOK						215
-#define COLON_COLON_TOK						216
-#define COLON_EQUAL_TOK						217
-#define PLUS_EQUAL_TOK						218
-#define STAR_EQUAL_TOK						219
-#define DASH_EQUAL_TOK						220
-#define SLASH_EQUAL_TOK						221
-#define BACKSLASH_EQUAL_TOK					222
-#define SLASH_SLASH_TOK						223
+#define AMPERSAND_AMPERSAND_TOK				214
+#define DASH_GREATER_TOK					224
+#define LESS_DASH_TOK						225
+#define COLON_COLON_TOK						226
+#define COLON_EQUAL_TOK						227
+#define PLUS_EQUAL_TOK						228
+#define STAR_EQUAL_TOK						229
+#define DASH_EQUAL_TOK						230
+#define SLASH_EQUAL_TOK						241
+#define BACKSLASH_EQUAL_TOK					242
+#define SLASH_SLASH_TOK						243
 
 // Triple Tokens
 #define GREATER_GREATER_EQUAL_TOK			301
@@ -192,3 +196,45 @@ void Display_Token( int token );
 
 
 #define TOK_ERR								1001	// error token
+#define TOK_ERR_EOF							1002	// end of file for *.gvm
+
+
+
+
+// Operators group by 1st symbol check to be sure, xl errors
+/*
+
+Strictly Single
+' " # $ % ( ) [ ] { } , . ; ? @ ^ _ ~
+
+	-			+
+	->			
+	-=			+=
+
+	*			!
+	**			
+	*=			!=
+
+	/		\
+	/*		block comment
+	/\		\/
+	/=		\=
+
+	:		=
+	::		=~
+	:=		==
+
+	|			&
+	||			&&
+
+	<			>
+	<-			
+	<<			>>
+	<<<			>>>
+	<<<=		>>>=
+	<<=			>>=
+	<=			>=
+	<>			><
+
+
+*/

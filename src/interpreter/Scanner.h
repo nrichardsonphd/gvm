@@ -28,11 +28,12 @@ class Scanner
 	private:
 		void Get_Next_Char();
 
-
+		void Slash_Tokens();
 		FILE *fp;						// pointer to file to scan
 		
 		char next_char;
 		int token;
+		string token_lit;
 		
 };
 

@@ -38,6 +38,9 @@
 #define CLOSE_BRACKET_TOK_LIT					']'
 #define OPEN_BRACE_TOK_LIT						'{'
 #define CLOSE_BRACE_TOK_LIT						'}'
+#define SLASH_STAR_TOK_LIT						"/*"
+#define STAR_SLASH_TOK_LIT						"*/"
+
 
 // Double Tokens
 #define BANG_EQUAL_TOK_LIT						"!="
@@ -53,6 +56,7 @@
 #define LESS_LESS_TOK_LIT						"<<"
 #define STAR_STAR_TOK_LIT						"**"
 #define PIPE_PIPE_TOK_LIT						"||"
+#define AMPERSAND_AMPERSAND_TOK_LIT				"&&"
 #define DASH_GREATER_TOK_LIT					"->"
 #define LESS_DASH_TOK_LIT						"<-"
 #define COLON_COLON_TOK_LIT						"::"
