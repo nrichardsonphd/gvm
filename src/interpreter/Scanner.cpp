@@ -50,12 +50,15 @@ void Scanner::Get_Next_Char()
 	}
 }
 
+////////////
+// Get the next token in the file
+////////////
 int Scanner::Get_Next_Token()
 {
 	bool skip_char = false;
 	this->token = 0;
 	
-
+	// clear the current token string and eat whitespace
 	do
 	{
 		this->token_string.clear();
@@ -77,6 +80,7 @@ int Scanner::Get_Next_Token()
 	}
 	while ( skip_char );
 		
+	// 
 	do
 	{
 		skip_char = false;
@@ -98,7 +102,6 @@ int Scanner::Get_Next_Token()
 
 			// single character only tokens
 			case '\'': this->token = APOSTROPHE_TOK; break;
-			case '\"': this->token = QUOTE_TOK; break;
 			case '#': this->token = POUND_TOK; break;
 			case '$': this->token = DOLLAR_TOK; break;
 			case '%': this->token = PERCENT_TOK; break;
@@ -260,12 +263,24 @@ int Scanner::Get_Next_Token()
 				this->Greater_Tokens();
 				break;
 
+			case '\"':	// string literal
+				this->token = QUOTE_TOK;
+
+				while ( this->next_char != '\"' )
+				{
+					this->Get_Next_Char( );
+				}
+
+				if ( this->next_char == '\"' )
+					this->token = STRING_LITERAL_TOK;
+
+				break;
 
 			default:	
 				while ( ( this->next_char >= 'a' && this->next_char <= 'z' ) || ( this->next_char >= 'A' && this->next_char <= 'Z' ) )
 				{
 					this->Get_Next_Char();
-					this->token = TOK_IDENTIFIER;
+					this->token = IDENTIFIER_TOK;
 				}
 				//this->token = TOK_UNKNOWN;
 				break;
@@ -278,7 +293,7 @@ int Scanner::Get_Next_Token()
 		if ( this->token != SLASH_TOK		&& this->token != BACKSLASH_TOK			&& this->token != STAR_TOK				&&
 			 this->token != DASH_TOK		&& this->token != EQUAL_TOK				&& this->token != PLUS_TOK				&&
 			 this->token != COLON_TOK		&& this->token != BANG_TOK				&& this->token != PIPE_TOK				&&
-			 this->token != TOK_IDENTIFIER	&&										   this->token != AMPERSAND_TOK			&&
+			 this->token != IDENTIFIER_TOK	&&										   this->token != AMPERSAND_TOK			&&
 			 this->token != LESS_TOK		&& this->token != LESS_LESS_TOK			&& this->token != LESS_LESS_LESS_TOK	&&
 			 this->token != GREATER_TOK		&& this->token != GREATER_GREATER_TOK	&& this->token != GREATER_GREATER_GREATER_TOK
 			)

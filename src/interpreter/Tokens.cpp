@@ -6,7 +6,6 @@ void Display_Token( int token )
 	switch ( token )
 	{
 		case TOK_ERR_EOF:	cout << "End of file token" << endl; break;
-		case TOK_IDENTIFIER: cout << "Identifier token" << endl; break;
 		case TOK_COMMENT: cout << "Comment token" << endl;
 
 
