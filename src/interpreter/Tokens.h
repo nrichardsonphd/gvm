@@ -190,15 +190,14 @@ void Display_Token( int token );
 ////////////////////
 #define IDENTIFIER_TOK						601		// identify a name
 #define KEYWORD_TOK							602		// change from id tok if it is a keyword
-#define INTEGER_LITERAL_TOK					603		// an integer coded in
-#define REAL_LITERAL_TOK					604		// a real number coded in
-#define STRING_LITERAL_TOK					605		// a string, within quotions coded in
+#define NUMBER_LITERAL_TOK					603		// a real number coded in
+#define STRING_LITERAL_TOK					604		// a string, within quotions coded in
 
 
 #define TOK_ERR								1001	// error token
 #define TOK_ERR_EOF							1002	// end of file for *.gvm
-#define TOK_COMMENT							1003	// token for a comment
-
+#define TOK_LINE_COMMENT					1003	// token for a comment
+#define TOK_BLOCK_COMMENT					1004	// token for a comment
 
 
 #define TOK_UNKNOWN							10001	// for development an unknown token

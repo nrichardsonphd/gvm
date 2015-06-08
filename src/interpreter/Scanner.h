@@ -30,11 +30,12 @@ class Scanner
 		bool Test_Tokens( bool detailed );		/// test with default file for all tokens defined
 												/// detail=true for output of each token
 	private:
-		void Get_Next_Char();
+		void Get_Next_Char();					/// Grab next character from file
 
-		void Slash_Tokens();
-		void Less_Tokens();
-		void Greater_Tokens();
+		void Slash_Tokens();					/// All tokens starting with a /
+		void Less_Tokens();						/// All tokens starting with a <
+		void Greater_Tokens();					/// All tokens starting with a >
+		void Literal_Tokens();					/// All tokens that are literals or identifiers
 
 		FILE *fp;								/// pointer to file to scan
 		

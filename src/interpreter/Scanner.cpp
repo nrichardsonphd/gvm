@@ -145,13 +145,13 @@ int Scanner::Get_Next_Token()
 				this->Slash_Tokens();
 
 				// get another token if it is a comment
-				if ( this->token == TOK_COMMENT )
+			/*	if ( this->token == TOK_COMMENT )
 				{
 					this->Get_Next_Char();
 					skip_char = true;
 					this->token_string.clear( );
 					this->token_string += this->next_char;
-				}
+				}*/
 				break;
 	
 			case '!':
@@ -283,10 +283,11 @@ int Scanner::Get_Next_Token()
 			case '\"':	// string literal
 				this->token = QUOTE_TOK;
 
-				while ( this->next_char != '\"' )
+				do
 				{
 					this->Get_Next_Char( );
 				}
+				while ( this->next_char != '\"' && this->next_char != EOF );
 
 				if ( this->next_char == '\"' )
 					this->token = STRING_LITERAL_TOK;
@@ -294,12 +295,9 @@ int Scanner::Get_Next_Token()
 				break;
 
 			default:	
-				while ( ( this->next_char >= 'a' && this->next_char <= 'z' ) || ( this->next_char >= 'A' && this->next_char <= 'Z' ) )
-				{
-					this->Get_Next_Char();
-					this->token = IDENTIFIER_TOK;
-				}
-				//this->token = TOK_UNKNOWN;
+				// deal with identifers, numbers and keywords
+				this->Literal_Tokens();		
+	
 				break;
 		}
 
@@ -310,23 +308,62 @@ int Scanner::Get_Next_Token()
 		if ( this->token != SLASH_TOK		&& this->token != BACKSLASH_TOK			&& this->token != STAR_TOK				&&
 			 this->token != DASH_TOK		&& this->token != EQUAL_TOK				&& this->token != PLUS_TOK				&&
 			 this->token != COLON_TOK		&& this->token != BANG_TOK				&& this->token != PIPE_TOK				&&
-			 this->token != IDENTIFIER_TOK	&&										   this->token != AMPERSAND_TOK			&&
+			 this->token != IDENTIFIER_TOK	&& this->token != NUMBER_LITERAL_TOK	&& this->token != AMPERSAND_TOK			&&
 			 this->token != LESS_TOK		&& this->token != LESS_LESS_TOK			&& this->token != LESS_LESS_LESS_TOK	&&
 			 this->token != GREATER_TOK		&& this->token != GREATER_GREATER_TOK	&& this->token != GREATER_GREATER_GREATER_TOK
 			)
 		{
 			this->Get_Next_Char();
 		}
-		else
-		{
-			this->token_string.pop_back();
-		}
+		
+		// remove the last character from the token string
+		this->token_string.pop_back();
+		
 
 		
 	}
 	while ( skip_char );
 	
 	return this->token;
+}
+
+
+//////////////////////////
+/// Deal with identifers, numbers and keywords
+//////////////////////////
+void Scanner::Literal_Tokens()
+{
+	if ( ( this->next_char >= 'a' && this->next_char <= 'z' ) || ( this->next_char >= 'A' && this->next_char <= 'Z' ) )
+	{
+		//This is a identifier or keyword  // the 1st character cannot be a number or underscore
+		while ( ( this->next_char >= 'a' && this->next_char <= 'z' ) || ( this->next_char >= 'A' && this->next_char <= 'Z' ) ||
+				( this->next_char >= '0' && this->next_char <= '9' ) || this->next_char == '_' )
+		{
+			this->Get_Next_Char();
+		}
+		
+		// check if a keyword
+
+		this->token = IDENTIFIER_TOK;
+	}
+	else if ( ( this->next_char >= '0' && this->next_char <= '9' ) )
+	{
+		// This is a number
+		while ( this->next_char >= '0' && this->next_char <= '9' )
+		{
+			this->Get_Next_Char();
+		}
+
+		this->token = NUMBER_LITERAL_TOK;
+	}
+	else
+	{
+		// Unknown token
+		this->token = TOK_ERR;
+	}
+
+//	this->token_string.pop_back( );
+
 }
 
 //////////////////////////
@@ -348,18 +385,18 @@ void Scanner::Slash_Tokens()
 			{
 				this->Get_Next_Char();
 			}
-			while ( this->next_char != '\n' );
-			this->token = TOK_COMMENT;
+			while ( this->next_char != '\n' && this->next_char != EOF );
+			this->token = TOK_LINE_COMMENT;
 			break;
 
 		case '*':	// block/inline comment
 			do
 			{
-				this->Get_Next_Char();
 				tmp = this->next_char;
+				this->Get_Next_Char();				
 			}
-			while ( tmp != '*' && this->next_char != '/' );
-			this->token = TOK_COMMENT;
+			while ( tmp != '*' || this->next_char != '/' && this->next_char != EOF );
+			this->token = TOK_BLOCK_COMMENT;
 			break;
 
 		case '=':	// divide equal
@@ -478,8 +515,9 @@ bool Scanner::Test_Tokens( bool detailed_output )
 	{
 		tk = this->Get_Next_Token();
 
-		cout << "Token found " << ++i << ": " << this->token_string << " <" << tk << "> ";
+		cout << "Token found " << ++i << ": ";
 		Display_Token( tk );
+		cout << " " << " <" << tk << "> " << this->token_string << endl;
 	}
 	while ( this->token != TOK_ERR_EOF );
 

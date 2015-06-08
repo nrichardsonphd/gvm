@@ -43,8 +43,10 @@ local.properties
 
 # Build results
 
-[Dd]ebug/
-[Rr]elease/
+ide/VC++/[Dd]ebug/
+ide/VC++/[Rr]elease/
+ide/VC++/gvm/[Dd]ebug/
+ide/VC++/gvm/[Rr]elease/
 x64/
 build/
 [Bb]in/

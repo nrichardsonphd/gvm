@@ -2,20 +2,25 @@
 some
 identifiers are here
 
-/* an inline comment*/
+/* an inline comment */
 
 /*/
 
+/**/
+
 /*
-and
-a 
-block
+a
+block 
 comment
 */
 
+123
+33.4456
+
+"a string goes here"
 
 Strictly Single
-' " # $ % ( ) [ ] { } , . ; ? @ ^ _ ~
+' # $ % ( ) [ ] { } , . ; ? @ ^ _ ~
 
 	-			+
 	->			
@@ -26,7 +31,7 @@ Strictly Single
 	*=			!=
 
 	/		\
-	/*		block comment
+	/*	*/	block comment
 	/\		\/
 	/=		\=
 
@@ -46,3 +51,4 @@ Strictly Single
 	<=			>=
 	<>			><
 
+//*/
