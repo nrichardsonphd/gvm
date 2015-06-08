@@ -51,7 +51,7 @@ void Scanner::Get_Next_Char()
 }
 
 ////////////
-// Get the next token in the file
+/// Get the next token in the file
 ////////////
 int Scanner::Get_Next_Token()
 {

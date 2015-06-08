@@ -16,7 +16,9 @@ using namespace std;
 void Title_Screen();
 void Get_Build_Number();
 
-
+///
+/// This is the start of the program
+///
 int main()
 {
 	Title_Screen();
