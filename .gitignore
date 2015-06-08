@@ -217,3 +217,4 @@ pip-log.txt
 
 #doxygen generated html files
 doc/doxygen/html/
+doc/doxygen/latex/
