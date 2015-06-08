@@ -216,5 +216,5 @@ pip-log.txt
 .mr.developer.cfg
 
 #doxygen generated html files
-doc/doxygen/html/
-doc/doxygen/latex/
+#doc/doxygen/html/
+#doc/doxygen/latex/
