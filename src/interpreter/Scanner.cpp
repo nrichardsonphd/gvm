@@ -111,7 +111,7 @@ int Scanner::Get_Next_Token( )
 	}
 	while ( skip_char );
 		
-	// 
+	// loop to get next token
 	do
 	{
 		skip_char = false;
@@ -154,76 +154,49 @@ int Scanner::Get_Next_Token( )
 			case '}': this->token = CLOSE_BRACE_TOK; break;
 
 			// multi character tokens
-
 			case '/':
 				this->Slash_Tokens();
 
 				// get another token if it is a comment
-			/*	if ( this->token == TOK_COMMENT )
-				{
-					this->Get_Next_Char();
+				if ( this->token == TOK_LINE_COMMENT || this->token == TOK_BLOCK_COMMENT )
 					skip_char = true;
-					this->token_string.clear( );
-					this->token_string += this->next_char;
-				}*/
-				break;
-	
+
+				break;	
 			case '!':
 				this->Get_Next_Char();
 
 				if ( this->next_char == '=' )
-				{
 					this->token = BANG_EQUAL_TOK;
-				}
 				else
-				{
 					this->token = BANG_TOK;
-				}
-
 				break;
-
 			case '|':
 				this->Get_Next_Char();
 
 				if ( this->next_char == '|' )
-				{
 					this->token = PIPE_PIPE_TOK;
-				}
 				else
-				{
 					this->token = PIPE_TOK;
-				}
 
 				break;
-
 			case '&':
 				this->Get_Next_Char();
 
 				if ( this->next_char == '&' )
-				{
 					this->token = AMPERSAND_AMPERSAND_TOK;
-				}
 				else
-				{
 					this->token = AMPERSAND_TOK;
-				}
 
-				break;
-			
+				break;			
 			case '+':
 				this->Get_Next_Char();
 
 				if ( this->next_char == '=' )
-				{
 					this->token = PLUS_EQUAL_TOK;
-				}
 				else
-				{
 					this->token = PLUS_TOK;
-				}
 
 				break;
-
 			case '-':
 				this->Get_Next_Char();
 
@@ -233,9 +206,7 @@ int Scanner::Get_Next_Token( )
 					case '=': this->token = DASH_EQUAL_TOK; break;
 					default: this->token = DASH_TOK; break;
 				}
-
 				break;
-
 			case '\\':
 				this->Get_Next_Char();
 
@@ -245,9 +216,7 @@ int Scanner::Get_Next_Token( )
 					case '=': this->token = BACKSLASH_EQUAL_TOK; break;
 					default:  this->token = BACKSLASH_TOK; break; 
 				}
-
 				break;
-
 			case '*':
 				this->Get_Next_Char();
 				
@@ -257,10 +226,7 @@ int Scanner::Get_Next_Token( )
 					case '=': this->token = STAR_EQUAL_TOK; break;
 					default: this->token = STAR_TOK; break;
 				}
-
 				break;
-
-
 			case '=':
 				this->Get_Next_Char();
 
@@ -270,9 +236,7 @@ int Scanner::Get_Next_Token( )
 					case '=': this->token = EQUAL_EQUAL_TOK; break;
 					default: this->token = EQUAL_TOK; break;
 				}
-
 				break;
-
 			case ':':
 				this->Get_Next_Char();
 
@@ -282,10 +246,7 @@ int Scanner::Get_Next_Token( )
 					case ':': this->token = COLON_COLON_TOK; break;
 					default: this->token = COLON_TOK; break;
 				}
-
 				break;
-
-
 			case '<':
 				this->Less_Tokens();
 				break;
@@ -293,7 +254,7 @@ int Scanner::Get_Next_Token( )
 			case '>':
 				this->Greater_Tokens();
 				break;
-
+				
 			case '\"':	// string literal
 				this->token = QUOTE_TOK;
 
@@ -307,14 +268,17 @@ int Scanner::Get_Next_Token( )
 					this->token = STRING_LITERAL_TOK;
 
 				break;
-
 			default:	
 				// deal with identifers, numbers and keywords
-				this->Literal_Tokens();		
-	
+				this->Literal_Tokens();			
 				break;
 		}
 
+		if ( skip_char )
+		{
+			this->token_string.clear( );	// clear token string if noncritical
+		}
+		
 		// do not get token if it is lead only of multi character token and already has it
 		// / is 1st of  // and /*; if only /, the next character is already in the buffer
 		//							/ \ * - = + : ! | < > &		single only	, char in buffer
@@ -328,13 +292,11 @@ int Scanner::Get_Next_Token( )
 			)
 		{
 			this->Get_Next_Char();
-		}
-		
-		// remove the last character from the token string
-		this->token_string.pop_back();
-		
+		}	
 
-		
+		// remove the last character from the token string that was placed in buffer
+		if ( !skip_char )
+			this->token_string.pop_back( ); 
 	}
 	while ( skip_char );
 	
@@ -528,11 +490,11 @@ void Scanner::Greater_Tokens()
 
 
 ///////////////////////////////////////////////////////////////////////////////
-// Test_Tokens
 ///		\author		Dr. Nicholas Richardson
 ///		\param		detailed_output		Show all tokens or just test that it works(T/F)
 ///		\details	
 ///			This will read a file to test that all tokens are read correctly.
+///		\todo	Better testing control.
 ///////////////////////////////////////////////////////////////////////////////
 bool Scanner::Test_Tokens( bool detailed_output )
 {	

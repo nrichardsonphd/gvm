@@ -2,7 +2,7 @@
 // This project will extend nauty by creating an language to interact with graphs easily.
 // Dr. Nicholas Richardson
 
-
+/// \file
 
 #define _CRT_SECURE_NO_DEPRECATE
 
@@ -13,21 +13,16 @@ using namespace std;
 
 #include "Scanner.h"
 
-void Title_Screen();
-void Get_Build_Number();
+void Title_Screen();			///< Title screen for startup
+void Get_Build_Number();		///< Find the Build number for Git
 
-///////////////////
-/// This is the start of the program
-//////////////////
 ///////////////////////////////////////////////////////////////////////////////
-/// Function Name
-///		@author		Dr. Nicholas Richardson
-///		@param 
-///		@brief
-///		@details
-///
+///		\author		Dr. Nicholas Richardson
+///		\param		argc	argument count
+///		\param		argv	argument list
+///		\details
+///			This is the start of the program
 ///////////////////////////////////////////////////////////////////////////////
-
 int main()
 {
 	Title_Screen();
@@ -39,12 +34,9 @@ int main()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Function Name
-///		@author		Dr. Nicholas Richardson
-///		@param 
-///		@brief
-///		@details
-///
+///		\author		Dr. Nicholas Richardson
+///		\details
+///			Display a default title screen when program starts.
 ///////////////////////////////////////////////////////////////////////////////
 void Title_Screen()
 {
@@ -61,12 +53,11 @@ void Title_Screen()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Function Name
-///		@author		Dr. Nicholas Richardson
-///		@param 
-///		@brief
-///		@details
-///
+///		\author		Dr. Nicholas Richardson
+///		\details
+///			Search git repository file structure to get build hash.
+///		\todo
+///			add some type of version numbering
 ///////////////////////////////////////////////////////////////////////////////
 void Get_Build_Number( )
 {
