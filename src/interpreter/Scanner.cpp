@@ -1,27 +1,34 @@
 #include "Scanner.h"
 
-//////////////////////////
-/// Constructor for class
-//////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+///		\author		Dr. Nicholas Richardson
+///		\details
+///			Initialize buffer and token
+///////////////////////////////////////////////////////////////////////////////
 Scanner::Scanner()
 {
 	this->next_char = '\0';
 	this->token = 0;
+	this->token_string.clear();
 }
 
-//////////////////////////
-/// Destructor for class
-//////////////////////////
-Scanner::~Scanner()
+///////////////////////////////////////////////////////////////////////////////
+///		\author		Dr. Nicholas Richardson
+///		\details
+///			Will close any open file.
+///////////////////////////////////////////////////////////////////////////////
+Scanner::~Scanner( )
 {
 	this->Close_File();
 }
 
-//////////////////////////
-/// Scan the file "filename" ( should be .gvm ).  The 1st character will be retrieved.  An error (false) is returned if 
-/// the file cannot be opened.
-///		@param filename		The file to scan *.gvm
-//////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+///		\author		Dr. Nicholas Richardson
+///		\param		filename	The file to scan should be *.gvm
+///		\details
+///			Scan the file "filename" ( should be .gvm ).  The 1st character will be retrieved.  An error (false) is returned if 
+///			the file cannot be opened.
+///////////////////////////////////////////////////////////////////////////////
 bool Scanner::Scan_File( string filename )
 {
 	this->Close_File();
@@ -38,11 +45,12 @@ bool Scanner::Scan_File( string filename )
 	}
 }
 
-
-//////////////////////////
-/// Close the file and reset tokens
-//////////////////////////
-void Scanner::Close_File()
+///////////////////////////////////////////////////////////////////////////////
+///		\author		Dr. Nicholas Richardson
+///		\details
+///			Close the file and reset tokens
+///////////////////////////////////////////////////////////////////////////////
+void Scanner::Close_File( )
 {
 	this->next_char = '\0';
 	this->token = 0;
@@ -53,11 +61,15 @@ void Scanner::Close_File()
 	}
 }
 
-//////////////////////////
-/// Grab the next character from the file.  The token string is added.  
-/// Note: If a token is reset after, this character must be added to the begining of the string.
-//////////////////////////
-void Scanner::Get_Next_Char()
+///////////////////////////////////////////////////////////////////////////////
+/// Function Name
+///		\author		Dr. Nicholas Richardson
+///		\details
+///			Grab the next character in the file.  This overwrites what is in next_char
+///			The character is added to the token string.  If a token is reset after, 
+///			this character must be added to the begining of the string.
+///////////////////////////////////////////////////////////////////////////////
+void Scanner::Get_Next_Char( )
 {
 	if ( this->fp )
 	{
@@ -67,10 +79,12 @@ void Scanner::Get_Next_Char()
 	}
 }
 
-//////////////////////////
-/// Get the next token in the file.  
-//////////////////////////
-int Scanner::Get_Next_Token()
+///////////////////////////////////////////////////////////////////////////////
+///		\author		Dr. Nicholas Richardson
+///		\details	
+///			Return the next token in the file
+///////////////////////////////////////////////////////////////////////////////
+int Scanner::Get_Next_Token( )
 {
 	bool skip_char = false;
 	this->token = 0;
@@ -327,10 +341,14 @@ int Scanner::Get_Next_Token()
 	return this->token;
 }
 
-
-//////////////////////////
-/// Deal with identifers, numbers and keywords
-//////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+///		\author		Dr. Nicholas Richardson
+///		\details 
+///			This function will find numbers, strings, and identifiers.
+///			A keyword is an identifier that matches a keyword in the GVM language
+///			Numbers are only literals, just a string 0-9, no decimals, +, -
+///			A string is surrounded by ""
+///////////////////////////////////////////////////////////////////////////////
 void Scanner::Literal_Tokens()
 {
 	if ( ( this->next_char >= 'a' && this->next_char <= 'z' ) || ( this->next_char >= 'A' && this->next_char <= 'Z' ) )
@@ -366,13 +384,15 @@ void Scanner::Literal_Tokens()
 
 }
 
-//////////////////////////
-/// Subprogram that deals with all tokens whose 1st character is a /
-/// If the token is only /  then you should not get the next character since it is in the buffer.
-/// If the token is /* it is a comment
-/// If the token is / something, a call to Get_Next_Char() should be down to update buffer.
-//////////////////////////
-void Scanner::Slash_Tokens()
+///////////////////////////////////////////////////////////////////////////////
+///		\author		Dr. Nicholas Richardson
+///		\details
+///			Subprogram that deals with all tokens whose 1st character is a /
+///			If the token is only /  then you should not get the next character since it is in the buffer.
+///			If the token is /* it is a comment
+///			If the token is / something, a call to Get_Next_Char() should be down to update buffer.
+///////////////////////////////////////////////////////////////////////////////
+void Scanner::Slash_Tokens( )
 {
 	bool comment = false;
 	char tmp;
@@ -414,13 +434,15 @@ void Scanner::Slash_Tokens()
 
 }
 
-//////////////////////////
-/// Subprogram that deals with all tokens whose 1st character is a <
-/// If the token is only <  then you should not get the next character since it is in the buffer.
-/// If the token is < something, a call to Get_Next_Char() should be down to update buffer.
-/// This has the possibility of being <<< or <<<=, similar conditions for updating buffer
-//////////////////////////
-void Scanner::Less_Tokens()
+///////////////////////////////////////////////////////////////////////////////
+///		\author		Dr. Nicholas Richardson
+///		\details
+///			Subprogram that deals with all tokens whose 1st character is a <
+///			If the token is only <  then you should not get the next character since it is in the buffer.
+///			If the token is < something, a call to Get_Next_Char() should be down to update buffer.
+///			This has the possibility of being <<< or <<<=, similar conditions for updating buffer
+///////////////////////////////////////////////////////////////////////////////
+void Scanner::Less_Tokens( )
 {
 	this->Get_Next_Char();
 
@@ -459,12 +481,14 @@ void Scanner::Less_Tokens()
 
 }
 
-//////////////////////////
-/// Subprogram that deals with all tokens whose 1st character is a >
-/// If the token is only >  then you should not get the next character since it is in the buffer.
-/// If the token is > something, a call to Get_Next_Char() should be down to update buffer.
-/// This has the possibility of being >>> or >>>=, similar conditions for updating buffer
-//////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+///		\author		Dr. Nicholas Richardson
+///		\details
+///			Subprogram that deals with all tokens whose 1st character is a >
+///			If the token is only >  then you should not get the next character since it is in the buffer.
+///			If the token is > something, a call to Get_Next_Char() should be down to update buffer.
+///			This has the possibility of being >>> or >>>=, similar conditions for updating buffer
+///////////////////////////////////////////////////////////////////////////////
 void Scanner::Greater_Tokens()
 {
 	this->Get_Next_Char();
@@ -501,10 +525,15 @@ void Scanner::Greater_Tokens()
 	}
 }
 
-//////////////////////////
-/// This will read a file to test that all tokens are read correctly.
-///		@param	detailed_output		Show all tokens or just test that it works(T/F)
-//////////////////////////
+
+
+///////////////////////////////////////////////////////////////////////////////
+// Test_Tokens
+///		\author		Dr. Nicholas Richardson
+///		\param		detailed_output		Show all tokens or just test that it works(T/F)
+///		\details	
+///			This will read a file to test that all tokens are read correctly.
+///////////////////////////////////////////////////////////////////////////////
 bool Scanner::Test_Tokens( bool detailed_output )
 {	
 	this->Scan_File("./src/tests/tokens.gvm");

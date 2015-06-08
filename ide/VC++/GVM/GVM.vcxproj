@@ -76,6 +76,9 @@
     <ClInclude Include="..\..\..\src\interpreter\Scanner.h" />
     <ClInclude Include="..\..\..\src\interpreter\Tokens.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\..\src\code_std.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
