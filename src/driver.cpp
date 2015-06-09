@@ -1,8 +1,12 @@
-// Graph Virtual Machine
-// This project will extend nauty by creating an language to interact with graphs easily.
-// Dr. Nicholas Richardson
+/// \file driver.cpp
+/// Graph Virtual Machine
+/// This file contains the main function and the functions to set up the program.
+/// This project will extend nauty by creating an language to interact with graphs easily.
+/// \author Dr. Nicholas Richardson
+/// \version Version 0
+///		\todo
+///			add some type of version numbering
 
-/// \file
 
 #define _CRT_SECURE_NO_DEPRECATE
 
@@ -11,15 +15,15 @@
 #include <iostream>
 using namespace std;
 
-#include "Scanner.h"
+#include "scanner.h"
 
 void Title_Screen();			///< Title screen for startup
 void Get_Build_Number();		///< Find the Build number for Git
 
 ///////////////////////////////////////////////////////////////////////////////
 ///		\author		Dr. Nicholas Richardson
-///		\param		argc	argument count
-///		\param		argv	argument list
+///		\param[in]		argc	argument count
+///		\param[in]		argv	argument list
 ///		\details
 ///			This is the start of the program
 ///////////////////////////////////////////////////////////////////////////////
@@ -56,8 +60,6 @@ void Title_Screen()
 ///		\author		Dr. Nicholas Richardson
 ///		\details
 ///			Search git repository file structure to get build hash.
-///		\todo
-///			add some type of version numbering
 ///////////////////////////////////////////////////////////////////////////////
 void Get_Build_Number( )
 {

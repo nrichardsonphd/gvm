@@ -1,4 +1,14 @@
-// This file contains tokens for keywords, literals
+///////////////////////////////////////////////////////////////////////////////
+///	\file token_keywords.h
+///		\author		Dr. Nicholas Richardson
+///		\brief		This file contains tokens for keywords, literals
+///		\details
+///		\details
+///			The literals are the text of the tokens.  These will be used
+///			when displaying a token or comparing token strings.  Not all
+///			tokens need a literal, only keywords and operators.
+///			See token_literals.h for a list of operator literals.
+///////////////////////////////////////////////////////////////////////////////
 #ifndef TOKEN_KEYWORDS
 #define TOKEN_KEYWORDS
 

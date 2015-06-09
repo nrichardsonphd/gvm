@@ -1,6 +1,15 @@
-// This file contains the literals for each token
-#ifndef TOKEN_LITERALS
-#define TOKEN_LITERALS
+///////////////////////////////////////////////////////////////////////////////
+///	\file token_operators.h
+///		\author		Dr. Nicholas Richardson
+///		\brief		This file contains the literals for each token operator
+///		\details
+///			The literals are the text of the tokens.  These will be used
+///			when displaying a token or comparing token strings.  Not all
+///			tokens need a literal, only keywords and operators.
+///			See token_keywords.h for a list of keyword literals.
+///////////////////////////////////////////////////////////////////////////////
+#ifndef TOKEN_OPERATORS
+#define TOKEN_OPERATORS
 
 // Single Tokens
 #define PLUS_TOK_LIT							'+'
@@ -79,4 +88,4 @@
 #define GREATER_GREATER_GREATER_EQUAL_TOK_LIT	">>>="
 
 
-#endif	// TOKEN_LITERALS
+#endif	// TOKEN_OPERATORS

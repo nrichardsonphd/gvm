@@ -1,18 +1,27 @@
-// This file will contain all the tokens needed for the Graph Virtual Machine Language
-// To add a new token,
-	// 1. If a literal is needed add literal to Token_Literals.h *_TOK_LIT
-	// 2. If it is a keyword, add to Token_Keywords.h *_TOK_KW
-	// 3. Add token in appropriate section with an appropriate number *_TOK
-	// 4. Add case to Display Tokens in Tokens.cpp
-	// 5. Add token to src/tests/tokens.gvm to be tested
-	// 6. Confirm Scanner captures token with Scanner::Test_Tokens
-	// 7. Update parser for new token
+///////////////////////////////////////////////////////////////////////////////
+///	\file tokens.h
+///		\author		Dr. Nicholas Richardson
+///
+///		\brief		Tokens for the GVM language
+///		\details
+///			
+///		This file will contain all the tokens needed for the Graph Virtual Machine Language
+///		To add a new token,
+///			1. If a literal is needed add literal to Token_Literals.h *_TOK_LIT
+///			2. If it is a keyword, add to Token_Keywords.h *_TOK_KW
+///			3. Add token in appropriate section with an appropriate number *_TOK
+///			4. Add case to Display Tokens in Tokens.cpp
+///			5. Add token to src/tests/tokens.gvm to be tested
+///			6. Confirm Scanner captures token with Scanner::Test_Tokens
+///			7. Update parser for new token
+///////////////////////////////////////////////////////////////////////////////
+
 
 #include <iostream>
 using namespace std;
 
-#include "Token_Literals.h"
-#include "Token_Keywords.h"
+#include "token_operators.h"
+#include "token_keywords.h"
 
 
 //////////////////////////

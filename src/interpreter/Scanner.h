@@ -1,6 +1,8 @@
 ///////////////////////////////////////////////////////////////////////////////
-/// Scanner
+///	\file scanner.h
 ///		\author		Dr. Nicholas Richardson
+///
+/// Scanner
 ///		\brief		Scan a .gvm file for tokens
 ///		\details
 ///			This class will scan through a *.gvm document an tokenize it.
@@ -8,7 +10,6 @@
 ///			Send filename to Scan_File to start.
 ///			Call Get_Next_Token to get the token value that is next.
 ///////////////////////////////////////////////////////////////////////////////
-
 #ifndef SCANNER_H
 #define SCANNER_H
 
@@ -20,7 +21,7 @@
 using namespace std;
 
 
-#include "Tokens.h"
+#include "tokens.h"
 
 class Scanner
 {

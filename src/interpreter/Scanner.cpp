@@ -1,7 +1,18 @@
-#include "Scanner.h"
+///////////////////////////////////////////////////////////////////////////////
+///	\file scanner.cpp
+///		\author		Dr. Nicholas Richardson
+///
+///	Scanner
+///		\todo	Better testing control.
+///
+///		\see Close_File()
+///////////////////////////////////////////////////////////////////////////////
+
+
+#include "scanner.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-///		\author		Dr. Nicholas Richardson
+///		\param	void
 ///		\details
 ///			Initialize buffer and token
 ///////////////////////////////////////////////////////////////////////////////
@@ -13,7 +24,8 @@ Scanner::Scanner()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-///		\author		Dr. Nicholas Richardson
+///		\param[in]		void
+///		\return		void
 ///		\details
 ///			Will close any open file.
 ///////////////////////////////////////////////////////////////////////////////
@@ -24,7 +36,7 @@ Scanner::~Scanner( )
 
 ///////////////////////////////////////////////////////////////////////////////
 ///		\author		Dr. Nicholas Richardson
-///		\param		filename	The file to scan should be *.gvm
+///		\param[in]		filename	The file to scan should be *.gvm
 ///		\details
 ///			Scan the file "filename" ( should be .gvm ).  The 1st character will be retrieved.  An error (false) is returned if 
 ///			the file cannot be opened.
@@ -341,9 +353,6 @@ void Scanner::Literal_Tokens()
 		// Unknown token
 		this->token = TOK_ERR;
 	}
-
-//	this->token_string.pop_back( );
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -487,14 +496,11 @@ void Scanner::Greater_Tokens()
 	}
 }
 
-
-
 ///////////////////////////////////////////////////////////////////////////////
 ///		\author		Dr. Nicholas Richardson
 ///		\param		detailed_output		Show all tokens or just test that it works(T/F)
 ///		\details	
 ///			This will read a file to test that all tokens are read correctly.
-///		\todo	Better testing control.
 ///////////////////////////////////////////////////////////////////////////////
 bool Scanner::Test_Tokens( bool detailed_output )
 {	
