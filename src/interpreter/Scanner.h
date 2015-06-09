@@ -9,6 +9,9 @@
 ///			The tokens can then be used by the parser.
 ///			Send filename to Scan_File to start.
 ///			Call Get_Next_Token to get the token value that is next.
+/// \see Scanner::Scan_File()			Open the file to scan
+///	\see Scanner::Get_Next_Token()		Get the next token in file
+///	\see Scanner::Test_Tokens()			Test scanner
 ///////////////////////////////////////////////////////////////////////////////
 #ifndef SCANNER_H
 #define SCANNER_H
@@ -32,7 +35,7 @@ class Scanner
 		bool Scan_File( string filename );		///< \brief initialize file to scan, will close any open file
 		void Close_File();						///< \brief Close file when finished
 		int Get_Next_Token();					///< \brief Call to get the next token in file
-		
+		string Get_Token_String();				///< \brief Get the current token string
 
 		bool Test_Tokens( bool detailed );		///< \brief test with default file for all tokens defined
 												///< detail=true for output of each token

@@ -8,7 +8,6 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 ///		\param[in]		token	This is the number of the token to display, use the definition for reference.
-///		\return			void
 ///		\details
 ///			A simple swith that will output the token literal.
 ///////////////////////////////////////////////////////////////////////////////
@@ -195,4 +194,28 @@ void Display_Token( int token )
 	};
 
 
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+///	\param[in]		string		This is the string to check if it is a keyword
+///	\return			int			This will return the keyword token, if not a keyword, identifier token will be returned
+///
+/// This will check an identifier to see if it matches a keyword.  Only identifiers
+/// need to call this since operators and literals will not be keywords
+/// \warning	Do not call this function if the token string, id, is not an identifier.
+///////////////////////////////////////////////////////////////////////////////
+int Keyword( string id )
+{
+	int token = IDENTIFIER_TOK;
+
+	if ( id == START_TOK_KW )
+		token = START_TOK;
+	else if ( id == END_TOK_KW )
+		token = END_TOK;
+	
+
+	return token;
 }

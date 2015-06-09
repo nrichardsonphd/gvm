@@ -4,11 +4,14 @@
     <Filter Include="Interpreter">
       <UniqueIdentifier>{42bda09d-de2f-4d0f-9f4d-6119f2efdb1a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Text Files">
-      <UniqueIdentifier>{e9ec38af-b24c-44db-9e67-2a56c01bac66}</UniqueIdentifier>
-    </Filter>
     <Filter Include="nauty">
       <UniqueIdentifier>{e2404c97-36ca-4650-aa41-0bb409f3347f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code Standards">
+      <UniqueIdentifier>{e9ec38af-b24c-44db-9e67-2a56c01bac66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GVM code">
+      <UniqueIdentifier>{371efff5-fc81-41b3-b77b-9add9288b002}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -19,15 +22,21 @@
     <ClCompile Include="..\..\..\src\interpreter\tokens.cpp">
       <Filter>Interpreter</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\interpreter\parser.cpp">
+      <Filter>Interpreter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\..\src\code_std.txt">
-      <Filter>Text Files</Filter>
+      <Filter>Code Standards</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\src\tests\tokens.gvm">
-      <Filter>Text Files</Filter>
+      <Filter>GVM code</Filter>
+    </None>
+    <None Include="..\..\..\src\tests\code.gvm">
+      <Filter>GVM code</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -41,6 +50,9 @@
       <Filter>Interpreter</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\interpreter\token_operators.h">
+      <Filter>Interpreter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\interpreter\parser.h">
       <Filter>Interpreter</Filter>
     </ClInclude>
   </ItemGroup>

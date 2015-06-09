@@ -1,20 +1,16 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///	\file scanner.cpp
-///		\author		Dr. Nicholas Richardson
+///	\author		Dr. Nicholas Richardson
 ///
 ///	Scanner
 ///		\todo	Better testing control.
-///
-///		\see Close_File()
 ///////////////////////////////////////////////////////////////////////////////
 
 
 #include "scanner.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-///		\param	void
-///		\details
-///			Initialize buffer and token
+///	Initialize buffer and token
 ///////////////////////////////////////////////////////////////////////////////
 Scanner::Scanner()
 {
@@ -24,10 +20,7 @@ Scanner::Scanner()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-///		\param[in]		void
-///		\return		void
-///		\details
-///			Will close any open file.
+///	Will close any open file.
 ///////////////////////////////////////////////////////////////////////////////
 Scanner::~Scanner( )
 {
@@ -35,11 +28,10 @@ Scanner::~Scanner( )
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-///		\author		Dr. Nicholas Richardson
-///		\param[in]		filename	The file to scan should be *.gvm
-///		\details
-///			Scan the file "filename" ( should be .gvm ).  The 1st character will be retrieved.  An error (false) is returned if 
-///			the file cannot be opened.
+///	\param[in]		filename	The file to scan should be *.gvm
+///
+///	Scan the file "filename" ( should be .gvm ).  The 1st character will be retrieved.  An error (false) is returned if 
+///	the file cannot be opened.
 ///////////////////////////////////////////////////////////////////////////////
 bool Scanner::Scan_File( string filename )
 {
@@ -58,9 +50,7 @@ bool Scanner::Scan_File( string filename )
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-///		\author		Dr. Nicholas Richardson
-///		\details
-///			Close the file and reset tokens
+///	Close the file and reset tokens
 ///////////////////////////////////////////////////////////////////////////////
 void Scanner::Close_File( )
 {
@@ -74,12 +64,9 @@ void Scanner::Close_File( )
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Function Name
-///		\author		Dr. Nicholas Richardson
-///		\details
-///			Grab the next character in the file.  This overwrites what is in next_char
-///			The character is added to the token string.  If a token is reset after, 
-///			this character must be added to the begining of the string.
+///	Grab the next character in the file.  This overwrites what is in next_char
+///	The character is added to the token string.  If a token is reset after, 
+///	this character must be added to the begining of the string.
 ///////////////////////////////////////////////////////////////////////////////
 void Scanner::Get_Next_Char( )
 {
@@ -92,9 +79,7 @@ void Scanner::Get_Next_Char( )
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-///		\author		Dr. Nicholas Richardson
-///		\details	
-///			Return the next token in the file
+///	Return the next token in the file
 ///////////////////////////////////////////////////////////////////////////////
 int Scanner::Get_Next_Token( )
 {
@@ -298,16 +283,18 @@ int Scanner::Get_Next_Token( )
 		if ( this->token != SLASH_TOK		&& this->token != BACKSLASH_TOK			&& this->token != STAR_TOK				&&
 			 this->token != DASH_TOK		&& this->token != EQUAL_TOK				&& this->token != PLUS_TOK				&&
 			 this->token != COLON_TOK		&& this->token != BANG_TOK				&& this->token != PIPE_TOK				&&
-			 this->token != IDENTIFIER_TOK	&& this->token != NUMBER_LITERAL_TOK	&& this->token != AMPERSAND_TOK			&&
+																					   this->token != AMPERSAND_TOK			&&
 			 this->token != LESS_TOK		&& this->token != LESS_LESS_TOK			&& this->token != LESS_LESS_LESS_TOK	&&
-			 this->token != GREATER_TOK		&& this->token != GREATER_GREATER_TOK	&& this->token != GREATER_GREATER_GREATER_TOK
+			 this->token != GREATER_TOK		&& this->token != GREATER_GREATER_TOK	&& this->token != GREATER_GREATER_GREATER_TOK &&
+			 this->token != IDENTIFIER_TOK	&& this->token != KEYWORD_TOK			&& this->token != NUMBER_LITERAL_TOK
 			)
 		{
 			this->Get_Next_Char();
-		}	
-
+		}
+		
+		
 		// remove the last character from the token string that was placed in buffer
-		if ( !skip_char )
+		if ( !skip_char && this->token != IDENTIFIER_TOK && this->token != KEYWORD_TOK && this->token != NUMBER_LITERAL_TOK ) 
 			this->token_string.pop_back( ); 
 	}
 	while ( skip_char );
@@ -315,13 +302,23 @@ int Scanner::Get_Next_Token( )
 	return this->token;
 }
 
+
+
 ///////////////////////////////////////////////////////////////////////////////
-///		\author		Dr. Nicholas Richardson
-///		\details 
-///			This function will find numbers, strings, and identifiers.
-///			A keyword is an identifier that matches a keyword in the GVM language
-///			Numbers are only literals, just a string 0-9, no decimals, +, -
-///			A string is surrounded by ""
+///	\return			string		The current token string
+///	
+///	This will return the current token string.
+///////////////////////////////////////////////////////////////////////////////
+string Scanner::Get_Token_String()
+{
+	return this->token_string;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+///	This function will find numbers, strings, and identifiers.
+///	A keyword is an identifier that matches a keyword in the GVM language
+///	Numbers are only literals, just a string 0-9, no decimals, +, -
+///	A string is surrounded by ""
 ///////////////////////////////////////////////////////////////////////////////
 void Scanner::Literal_Tokens()
 {
@@ -334,9 +331,11 @@ void Scanner::Literal_Tokens()
 			this->Get_Next_Char();
 		}
 		
+		// remove last character from token string
+		this->token_string.pop_back();
+		
 		// check if a keyword
-
-		this->token = IDENTIFIER_TOK;
+		this->token = Keyword( this->token_string );
 	}
 	else if ( ( this->next_char >= '0' && this->next_char <= '9' ) )
 	{
@@ -356,12 +355,10 @@ void Scanner::Literal_Tokens()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-///		\author		Dr. Nicholas Richardson
-///		\details
-///			Subprogram that deals with all tokens whose 1st character is a /
-///			If the token is only /  then you should not get the next character since it is in the buffer.
-///			If the token is /* it is a comment
-///			If the token is / something, a call to Get_Next_Char() should be down to update buffer.
+///	Subprogram that deals with all tokens whose 1st character is a /
+/// If the token is only /  then you should not get the next character since it is in the buffer.
+///	If the token is /* it is a comment
+///	If the token is / something, a call to Get_Next_Char() should be down to update buffer.
 ///////////////////////////////////////////////////////////////////////////////
 void Scanner::Slash_Tokens( )
 {
@@ -406,12 +403,10 @@ void Scanner::Slash_Tokens( )
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-///		\author		Dr. Nicholas Richardson
-///		\details
-///			Subprogram that deals with all tokens whose 1st character is a <
-///			If the token is only <  then you should not get the next character since it is in the buffer.
-///			If the token is < something, a call to Get_Next_Char() should be down to update buffer.
-///			This has the possibility of being <<< or <<<=, similar conditions for updating buffer
+///	Subprogram that deals with all tokens whose 1st character is a <
+///	If the token is only <  then you should not get the next character since it is in the buffer.
+///	If the token is < something, a call to Get_Next_Char() should be down to update buffer.
+///	This has the possibility of being <<< or <<<=, similar conditions for updating buffer
 ///////////////////////////////////////////////////////////////////////////////
 void Scanner::Less_Tokens( )
 {
@@ -453,12 +448,10 @@ void Scanner::Less_Tokens( )
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-///		\author		Dr. Nicholas Richardson
-///		\details
-///			Subprogram that deals with all tokens whose 1st character is a >
-///			If the token is only >  then you should not get the next character since it is in the buffer.
-///			If the token is > something, a call to Get_Next_Char() should be down to update buffer.
-///			This has the possibility of being >>> or >>>=, similar conditions for updating buffer
+///	Subprogram that deals with all tokens whose 1st character is a >
+/// If the token is only >  then you should not get the next character since it is in the buffer.
+///	If the token is > something, a call to Get_Next_Char() should be down to update buffer.
+///	This has the possibility of being >>> or >>>=, similar conditions for updating buffer
 ///////////////////////////////////////////////////////////////////////////////
 void Scanner::Greater_Tokens()
 {
@@ -497,10 +490,9 @@ void Scanner::Greater_Tokens()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-///		\author		Dr. Nicholas Richardson
-///		\param		detailed_output		Show all tokens or just test that it works(T/F)
-///		\details	
-///			This will read a file to test that all tokens are read correctly.
+///	\param		detailed_output		Show all tokens or just test that it works(T/F)
+///	
+///	This will read a file to test that all tokens are read correctly.
 ///////////////////////////////////////////////////////////////////////////////
 bool Scanner::Test_Tokens( bool detailed_output )
 {	

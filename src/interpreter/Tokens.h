@@ -16,7 +16,7 @@
 ///			7. Update parser for new token
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#include <string>
 #include <iostream>
 using namespace std;
 
@@ -27,7 +27,8 @@ using namespace std;
 //////////////////////////
 // Functions for tokens //
 //////////////////////////
-void Display_Token( int token );
+void Display_Token( int token );			///< \brief Display the token literal
+int Keyword( string id );					///< \brief Check if the string is a keyword
 
 
 /////////////////////

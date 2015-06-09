@@ -67,6 +67,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\driver.cpp" />
+    <ClCompile Include="..\..\..\src\interpreter\parser.cpp" />
     <ClCompile Include="..\..\..\src\interpreter\scanner.cpp" />
     <ClCompile Include="..\..\..\src\interpreter\tokens.cpp" />
   </ItemGroup>
@@ -74,9 +75,11 @@
     <Text Include="..\..\..\src\code_std.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\src\tests\code.gvm" />
     <None Include="..\..\..\src\tests\tokens.gvm" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\src\interpreter\parser.h" />
     <ClInclude Include="..\..\..\src\interpreter\scanner.h" />
     <ClInclude Include="..\..\..\src\interpreter\tokens.h" />
     <ClInclude Include="..\..\..\src\interpreter\token_keywords.h" />
