@@ -4,6 +4,7 @@
 /// This project will extend nauty by creating an language to interact with graphs easily.
 /// \author Dr. Nicholas Richardson
 /// \version Version 0
+/// \see main()
 ///		\todo
 ///			add some type of version numbering
 
@@ -16,6 +17,7 @@
 using namespace std;
 
 #include "scanner.h"
+#include "parser.h"
 
 void Title_Screen();			///< Title screen for startup
 void Get_Build_Number();		///< Find the Build number for Git
@@ -27,12 +29,16 @@ void Get_Build_Number();		///< Find the Build number for Git
 ///		\details
 ///			This is the start of the program
 ///////////////////////////////////////////////////////////////////////////////
-int main()
+int main( int argc, char **argv )
 {
 	Title_Screen();
 
-	Scanner s;
-	s.Test_Tokens(true);
+	//Scanner s;
+	//s.Test_Tokens(true);
+
+	Parser p;
+	p.Parse_Program( "src/tests/code.gvm" );
+
 
 	return 0;
 }

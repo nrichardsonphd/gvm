@@ -123,6 +123,7 @@ int Keyword( string id );					///< \brief Check if the string is a keyword
 #define PROGRAM_TOK							505
 #define CALL_TOK							506
 #define RETURN_TOK							507
+#define FINPUT_TOK							508
 
 // control structures
 #define IF_TOK								510

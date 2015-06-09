@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///	\file tokens.cpp
 ///		\author		Dr. Nicholas Richardson
-///		This file will have some functions to display tokens
+///		\brief This file will have some functions to display tokens
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "tokens.h"
@@ -215,7 +215,116 @@ int Keyword( string id )
 		token = START_TOK;
 	else if ( id == END_TOK_KW )
 		token = END_TOK;
-	
+	else if ( id == PROGRAM_TOK_KW )
+		token = PROGRAM_TOK;
+	else if ( id == INCLUDE_TOK_KW )
+		token = INCLUDE_TOK;
+	else if ( id == FUNCTION_TOK_KW )
+		token = FUNCTION_TOK;
+	else if ( id == CALL_TOK_KW )
+		token = CALL_TOK;
+	else if ( id == RETURN_TOK_KW )
+		token = RETURN_TOK;
+	else if ( id == INPUT_TOK_KW )
+		token = FINPUT_TOK;
+	else if ( id == IF_TOK_KW )
+		token = IF_TOK;
+	else if ( id == THEN_TOK_KW )
+		token = THEN_TOK;
+	else if ( id == ELSE_TOK_KW )
+		token = ELSE_TOK;
+	else if ( id == ENDIF_TOK_KW )
+		token = ENDIF_TOK;
+	else if ( id == SELECT_TOK_KW )
+		token = SELECT_TOK;
+	else if ( id == CASE_TOK_KW )
+		token = CASE_TOK;
+	else if ( id == DEFAULT_TOK_KW )
+		token = DEFAULT_TOK;
+	else if ( id == FOR_TOK_KW )
+		token = FOR_TOK;
+	else if ( id == TO_TOK_KW )
+		token = TO_TOK;
+	else if ( id == STEP_TOK_KW )
+		token = STEP_TOK;
+	else if ( id == NEXT_TOK_KW )
+		token = NEXT_TOK;
+	else if ( id == DO_TOK_KW )
+		token = DO_TOK;
+	else if ( id == UNTIL_TOK_KW )
+		token = UNTIL_TOK;
+	else if ( id == WHILE_TOK_KW )
+		token = WHILE_TOK;
+	else if ( id == WEND_TOK_KW )
+		token = WEND_TOK;
+	else if ( id == MOD_TOK_KW )
+		token = MOD_TOK;
+	else if ( id == INFINITY_TOK_KW )
+		token = INFINITY_TOK;
+	else if ( id == NULL_TOK_KW )
+		token = NULL_TOK;
+	else if ( id == TRUE_TOK_KW )
+		token = TRUE_TOK;
+	else if ( id == FALSE_TOK_KW )
+		token = FALSE_TOK;
+	else if ( id == PRINT_TOK_KW )
+		token = PRINT_TOK;
+	else if ( id == INPUT_TOK_KW )
+		token = INPUT_TOK;
+	else if ( id == OPEN_TOK_KW )
+		token = OPEN_TOK;
+	else if ( id == CLOSE_TOK_KW )
+		token = CLOSE_TOK;
+	else if ( id == READ_TOK_KW )
+		token = READ_TOK;
+	else if ( id == WRITE_TOK_KW )
+		token = WRITE_TOK;
+	else if ( id == EOF_TOK_KW )
+		token = EOF_TOK;
+	else if ( id == INT_TOK_KW )
+		token = INT_TOK;
+	else if ( id == REAL_TOK_KW )
+		token = REAL_TOK;
+	else if ( id == STRING_TOK_KW )
+		token = STRING_TOK;
+	else if ( id == BOOL_TOK_KW )
+		token = BOOL_TOK;
+	else if ( id == CLASS_TOK_KW )
+		token = CLASS_TOK;
+	else if ( id == GRAPH_TOK_KW )
+		token = GRAPH_TOK;
+	else if ( id == VERTEX_TOK_KW )
+		token = VERTEX_TOK;
+	else if ( id == EDGE_TOK_KW )
+		token = EDGE_TOK;
+	else if ( id == SET_TOK_KW )
+		token = SET_TOK;
+	else if ( id == AND_TOK_KW )
+		token = AND_TOK;
+	else if ( id == OR_TOK_KW )
+		token = OR_TOK;
+	else if ( id == XOR_TOK_KW )
+		token = XOR_TOK;
+	else if ( id == NOT_TOK_KW )
+		token = NOT_TOK;
+	else if ( id == IN_TOK_KW )
+		token = IN_TOK;
+	else if ( id == NOTIN_TOK_KW )
+		token = NOTIN_TOK;
+	// special structure loops
+	else if ( id == FORALL_TOK_KW )
+		token = FORALL_TOK;
+	else if ( id == FA_TRUE_TOK_KW )
+		token = FA_TRUE_TOK;
+	else if ( id == FA_FALSE_TOK_KW )
+		token = FA_FALSE_TOK;
+	else if ( id == THERE_EXISTS_TOK_KW )
+		token = THERE_EXISTS_TOK;
+	else if ( id == TE_TRUE_TOK_KW )
+		token = TE_TRUE_TOK;
+	else if ( id == TE_FALSE_TOK_KW )
+		token = TE_FALSE_TOK;
+
 
 	return token;
 }

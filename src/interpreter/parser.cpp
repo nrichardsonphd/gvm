@@ -56,22 +56,42 @@ bool Parser::Parse_Program( string filename )
 {
 	// open the file and grab the 1st token
 	scan.Scan_File( filename );
-	/// Get Include files Block
+	
 	do
 	{
-		this->token = this->scan.Get_Next_Token();
-		Display_Token( this->token );
-		cout << " <::> " << this->scan.Get_Token_String() << endl;
+		this->token = scan.Get_Next_Token( );
+		Display_Token( this->token ); cout << " <::>" <<  scan.Get_Token_String() << endl;
+		
+		switch ( token )
+		{
+			/// Get Include files Block
+			case INCLUDE_TOK:
+				break;
+			
+			/// Function Block
+			case FUNCTION_TOK:
+				break;
+			
+			/// get global variables
+			case REAL_TOK:
+				break;
+
+			case START_TOK:
+				// expect identifier, PROGRAM starts main portion, any other id is a function
+				this->token = this->scan.Get_Next_Token();
+				
+				if ( this->token == PROGRAM_TOK )
+					cout << "program";
+				break;
+
+			default:
+				break;
+		};
 	}
 	while ( this->token != TOK_ERR_EOF );
 
-	/// Function Block
 
-	/// Start of program
 
-	/// code stuff
-
-	/// end program
 	scan.Close_File();
 	return true;
 }

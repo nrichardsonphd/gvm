@@ -21,6 +21,7 @@
 #define PROGRAM_TOK_KW						"PROGRAM"
 #define CALL_TOK_KW							"CALL"
 #define RETURN_TOK_KW						"RETURN"
+#define FINPUT_TOK_KW						"FINPUT"
 
 // control structures
 #define IF_TOK_KW							"IF"

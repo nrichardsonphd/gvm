@@ -10,7 +10,7 @@ START+ FUNCTION_NAME
 END FUNCTION_NAME
 */
 
-START+ PROGRAM
+START PROGRAM
 	// this is where the code should start
 	// statements will go here
 END PROGRAM
