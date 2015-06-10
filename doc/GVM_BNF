@@ -1,0 +1,51 @@
+<Program> -> <Includes> <Declarations> <Main> <PostCode>
+<Includes> -> INCLUDE "<*.gvm>"
+<Declarations> -> <Functions><Declarations> | <Variables><Declarations> | <Constants><Declarations>
+<Identifier> [a-z,A-z][a-z,A-Z,_,0-9]* | NULL
+
+<Block> -> START <BlockType> <Identifier> <Input> <Output> <StatementList> END <Identifier>
+<BlockType> -> FUNCTION | PROGRAM
+<Input> -> IN: <Variable><VariableList> | Null
+<Output> -> OUT: <Variable><VariableList> | Null
+<VariableList> -> , <Variable><VariableList> | Null
+<Variable> -> <VariableType> <Identifier> <Initialize>
+<Initialize> -> = <Expr> | Null
+
+?<Functions> -> <FunctionDecl> | START FUNCTION <FunctionName> <StatementList> END <FunctionName>
+
+<Main> -> START PROGRAM <StatementList> END PROGRAM
+
+<StatementList> -> <Statement>;<StatementList>
+
+<Statement> -> <Assignment> | <ConditionStructure> | <LoopStructure> | <SpecialStructure>
+
+<Assignment> -> <Identifier> <Assignment_OP> <Expr>
+<Assignment_OP> -> = <Expr>| := <GraphExpr>
+
+<Expr> -> <Expr><Expr1> + <Expr1> | <Expr1> - <Expr1> | <Identifier> | Null
+<Expr1> -> <Expr1> * <Expr> | <Expr> / <Expr> | <Expr> \ <Expr> | Null
+<Expr2> -> <Expr> MOD <Expr> | Null
+
+<ConditionStructure> -> <If> | <Select>
+<If> -> IF <Condition> THEN <StatementList> <Else> ENDIF
+<Else> -> ELSE <StatementList> | NULL
+<Condition> -> <Expr> <Compare> <Expr> | TRUE | FALSE
+<Compare> -> < | > | <= | >= | != | ==
+<Select> -> SELECT <Expr> <Cases> END SELECT
+<Cases> -> CASE <Numeral_Literal>: <StatementList><Cases> | DEFAULT: <StatementList> | Null
+
+<LoopStructure> -> <For> | <While> | <Do>
+<For> -> FOR <Identifier> = <Expr> to <Expr> <STEP> <StatementList> NEXT <Identifier>
+<STEP> -> STEP <Expr> | Null
+<While> -> WHILE <Expr> <StatementList> WEND
+<Do> -> DO <StatementList> <EndCond>
+<EndCond> -> LOOP UNTIL <Expr> | WHILE <Expr>
+
+<SpecialStructure> -> <ForAll> | <ThereExists> | <SetTheory> | <GraphTheory>
+<ForAll> -> FORALL ( <> ) <StatementList> <FA_TRUE> <FA_FALSE>
+<FA_TRUE> -> FA_TRUE <StatementList> | NULL
+<FA_FALSE> -> FA_FALE <StatementList> | NULL
+<ThereExist> -> THEREEXISTS ( <> ) <StatementList> <TE_TRUE> <TE_FALSE>
+<TE_TRUE> -> TE_TRUE <StatementList> | NULL
+<TE_FALSE> -> TE_FALE <StatementList> | NULL
+
