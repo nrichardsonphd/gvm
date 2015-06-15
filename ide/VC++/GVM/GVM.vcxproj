@@ -44,7 +44,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\richardsonn\Documents\GitHub\gvm\src;C:\Users\richardsonn\Documents\GitHub\gvm\src\interpreter;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\richardsonn\Documents\GitHub\gvm\src;C:\Users\richardsonn\Documents\GitHub\gvm\src\interpreter;C:\Users\richardsonn\Documents\GitHub\gvm\src\gvm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -67,6 +67,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\driver.cpp" />
+    <ClCompile Include="..\..\..\src\gvm\graph_vm.cpp" />
+    <ClCompile Include="..\..\..\src\gvm\gvm_memory.cpp" />
     <ClCompile Include="..\..\..\src\interpreter\parser.cpp" />
     <ClCompile Include="..\..\..\src\interpreter\scanner.cpp" />
     <ClCompile Include="..\..\..\src\interpreter\tokens.cpp" />
@@ -79,6 +81,10 @@
     <None Include="..\..\..\src\tests\tokens.gvm" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\src\gvm\graph_vm.h" />
+    <ClInclude Include="..\..\..\src\gvm\gvm_memory.h" />
+    <ClInclude Include="..\..\..\src\gvm\gvm_opcodes.h" />
+    <ClInclude Include="..\..\..\src\interpreter\gvm_types.h" />
     <ClInclude Include="..\..\..\src\interpreter\parser.h" />
     <ClInclude Include="..\..\..\src\interpreter\scanner.h" />
     <ClInclude Include="..\..\..\src\interpreter\tokens.h" />

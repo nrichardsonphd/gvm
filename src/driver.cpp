@@ -19,6 +19,8 @@ using namespace std;
 #include "scanner.h"
 #include "parser.h"
 
+#include "graph_vm.h"
+
 void Title_Screen();			///< Title screen for startup
 void Get_Build_Number();		///< Find the Build number for Git
 
@@ -36,8 +38,10 @@ int main( int argc, char **argv )
 	//Scanner s;
 	//s.Test_Tokens(true);
 
-	Parser p;
-	p.Parse_Program( "src/tests/code.gvm" );
+	//Parser p;
+	//p.Parse_Program( "src/tests/code.gvm" );
+
+	Graph_VM gvm;
 
 
 	return 0;

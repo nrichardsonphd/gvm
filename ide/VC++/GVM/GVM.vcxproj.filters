@@ -13,6 +13,9 @@
     <Filter Include="GVM code">
       <UniqueIdentifier>{371efff5-fc81-41b3-b77b-9add9288b002}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GVM">
+      <UniqueIdentifier>{ac354454-eca2-418d-a1d8-4e5e90acf52a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\driver.cpp" />
@@ -25,6 +28,10 @@
     <ClCompile Include="..\..\..\src\interpreter\parser.cpp">
       <Filter>Interpreter</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\gvm\graph_vm.cpp">
+      <Filter>GVM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\gvm\gvm_memory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\..\src\code_std.txt">
@@ -55,5 +62,13 @@
     <ClInclude Include="..\..\..\src\interpreter\parser.h">
       <Filter>Interpreter</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\gvm\graph_vm.h">
+      <Filter>GVM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\gvm\gvm_opcodes.h">
+      <Filter>GVM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\gvm\gvm_memory.h" />
+    <ClInclude Include="..\..\..\src\interpreter\gvm_types.h" />
   </ItemGroup>
 </Project>
