@@ -70,5 +70,8 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\gvm\gvm_memory.h" />
     <ClInclude Include="..\..\..\src\interpreter\gvm_types.h" />
+    <ClInclude Include="..\..\..\lib\nauty25r9\nauty.h">
+      <Filter>nauty</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

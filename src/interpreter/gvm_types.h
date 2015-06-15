@@ -42,6 +42,7 @@ struct Edge
 struct Graph
 {
 	int g[32];
+	int vertices;
 };
 
 struct Class

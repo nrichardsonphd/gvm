@@ -21,6 +21,11 @@ using namespace std;
 
 #include "graph_vm.h"
 
+
+
+
+#include "nauty.h"
+
 void Title_Screen();			///< Title screen for startup
 void Get_Build_Number();		///< Find the Build number for Git
 
@@ -42,7 +47,11 @@ int main( int argc, char **argv )
 	//p.Parse_Program( "src/tests/code.gvm" );
 
 	Graph_VM gvm;
+	graph g[32];
+	ADDELEMENT( &g[0], 5 );
+	ADDELEMENT( &g[5], 0 );
 
+	cout << "maxn: " << MAXN << endl;
 
 	return 0;
 }

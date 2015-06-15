@@ -22,9 +22,22 @@
 <Assignment> -> <Identifier> <Assignment_OP> <Expr>
 <Assignment_OP> -> = <Expr>| := <GraphExpr>
 
-<Expr> -> <Expr><Expr1> + <Expr1> | <Expr1> - <Expr1> | <Identifier> | Null
-<Expr1> -> <Expr1> * <Expr> | <Expr> / <Expr> | <Expr> \ <Expr> | Null
-<Expr2> -> <Expr> MOD <Expr> | Null
+<OP> -> + | - | ^ | \/ | <> | ><
+<OP> -> * | / | \ | /\
+<OP> -> ! | ' 
+
+<SetOP> -> in | notin | \/ | /\
+
+<GraphOP> -> + | - | ^ | /\ | \/ | <> | >< | * | \ | /
+
+<Assignment> -> = | := | <- 
+
+<Expr> -> <Expr> <OP1> <Expr2> | <Expr2>
+<Expr2> -> <Expr2> <OP2> <Expr3> | <Expr3>
+
+
+<ExprX> -> ( <Expr> ) | { <Set> } | [ <Graph> ] | Null
+
 
 <ConditionStructure> -> <If> | <Select>
 <If> -> IF <Condition> THEN <StatementList> <Else> ENDIF
@@ -48,4 +61,5 @@
 <ThereExist> -> THEREEXISTS ( <> ) <StatementList> <TE_TRUE> <TE_FALSE>
 <TE_TRUE> -> TE_TRUE <StatementList> | NULL
 <TE_FALSE> -> TE_FALE <StatementList> | NULL
+
 
