@@ -1,5 +1,9 @@
 #ifndef GVM_MEMORY
 #define GVM_MEMORY
+#define _CRT_SECURE_NO_DEPRECATE
+#include <string>
+#include <iostream>
+using namespace std;
 
 class GVM_Memory
 {
@@ -7,12 +11,25 @@ class GVM_Memory
 		GVM_Memory();
 		~GVM_Memory();
 
+		void Set_Memory_Size( unsigned int max_size );
+		bool Allocate_Memory();
+
 		unsigned int get1( unsigned int addr );
 		unsigned int get2( unsigned int addr );
 		unsigned int get4( unsigned int addr );
 
+		void put1( unsigned int addr, unsigned int value );
+		void put2( unsigned int addr, unsigned int value );
+		void put4( unsigned int addr, unsigned int value );
+
+		bool load( std::string filename );
+		void coredump_txt( std::string filename );
+		void coredump( std::string filename );
+
+		void outHex( unsigned int );
 	private:
-		char *ram;
+		unsigned char *ram;
+		unsigned int size;
 
 };
 

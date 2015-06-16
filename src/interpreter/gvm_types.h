@@ -3,15 +3,23 @@
 
 #include <string>
 
+struct type
+{
+	unsigned int address;
+	unsigned int size;
+};
+
 // standard types
 struct Integer
 {
-	int value;
+	type address;
+	int *location
+
 };
 
 struct Real
 {
-	float value;
+	float *location;
 };
 
 struct String
@@ -41,7 +49,8 @@ struct Edge
 // *** change to nauty
 struct Graph
 {
-	int g[32];
+	int *g;
+	int maxn, maxm;
 	int vertices;
 };
 

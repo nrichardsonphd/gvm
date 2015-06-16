@@ -31,7 +31,9 @@
     <ClCompile Include="..\..\..\src\gvm\graph_vm.cpp">
       <Filter>GVM</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\gvm\gvm_memory.cpp" />
+    <ClCompile Include="..\..\..\src\gvm\gvm_memory.cpp">
+      <Filter>GVM</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\..\src\code_std.txt">
@@ -68,10 +70,11 @@
     <ClInclude Include="..\..\..\src\gvm\gvm_opcodes.h">
       <Filter>GVM</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\gvm\gvm_memory.h" />
-    <ClInclude Include="..\..\..\src\interpreter\gvm_types.h" />
-    <ClInclude Include="..\..\..\lib\nauty25r9\nauty.h">
-      <Filter>nauty</Filter>
+    <ClInclude Include="..\..\..\src\interpreter\gvm_types.h">
+      <Filter>GVM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\gvm\gvm_memory.h">
+      <Filter>GVM</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

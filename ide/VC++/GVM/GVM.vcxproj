@@ -81,7 +81,6 @@
     <None Include="..\..\..\src\tests\tokens.gvm" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\lib\nauty25r9\nauty.h" />
     <ClInclude Include="..\..\..\src\gvm\graph_vm.h" />
     <ClInclude Include="..\..\..\src\gvm\gvm_memory.h" />
     <ClInclude Include="..\..\..\src\gvm\gvm_opcodes.h" />

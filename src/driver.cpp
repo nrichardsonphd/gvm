@@ -21,13 +21,13 @@ using namespace std;
 
 #include "graph_vm.h"
 
+#define MAXN 128
 
-
-
-#include "nauty.h"
+//#include "nauty.h"
 
 void Title_Screen();			///< Title screen for startup
 void Get_Build_Number();		///< Find the Build number for Git
+void To_Upper( string &str );	///< Convert string to upper case
 
 ///////////////////////////////////////////////////////////////////////////////
 ///		\author		Dr. Nicholas Richardson
@@ -47,17 +47,38 @@ int main( int argc, char **argv )
 	//p.Parse_Program( "src/tests/code.gvm" );
 
 	Graph_VM gvm;
-	graph g[32];
+	GVM_Memory mem;
+
+	mem.Set_Memory_Size( 16 );
+	mem.Allocate_Memory();
+	mem.put4( 0, 0x44434241 );
+	mem.put1( 8, 0xAA );
+	mem.put2( 4, 0xDEAD );
+	mem.put4( 12, 0x44434241 );
+	mem.outHex( mem.get4( 0 ));
+
+	mem.coredump( "tmp/tmp.hex" );
+	string s = "soME CaSesS";
+	cout << s << endl;
+	To_Upper( s );
+	cout << s << endl;
+	mem.load( "tmp/tmp.hex" );
+	gvm.cycle();
+/*	graph g[MAXN*MAXM];
+	
+	
+	EMPTYGRAPH( g, 2, 128 );
 	ADDELEMENT( &g[0], 5 );
 	ADDELEMENT( &g[5], 0 );
-
+	
 	cout << "maxn: " << MAXN << endl;
-
+	cout << "maxm: " << MAXM << endl;
+	cout << "ws: " << WORDSIZE << endl;
+	*/
 	return 0;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-///		\author		Dr. Nicholas Richardson
 ///		\details
 ///			Display a default title screen when program starts.
 ///////////////////////////////////////////////////////////////////////////////
@@ -76,7 +97,6 @@ void Title_Screen()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-///		\author		Dr. Nicholas Richardson
 ///		\details
 ///			Search git repository file structure to get build hash.
 ///////////////////////////////////////////////////////////////////////////////
@@ -104,4 +124,17 @@ void Get_Build_Number( )
 	}
 	while ( build_number[i] != '\n' );
 	
+}
+
+///////////////////////////////////////////////////////////////////////////////
+///		\details
+///			Conver a string to uppercase letters.
+///////////////////////////////////////////////////////////////////////////////
+void To_Upper( string &str )
+{
+	for ( int i = 0; i < str.length(); ++i )
+	{
+		if ( str[i] >= 'a' && str[i] <= 'z' )
+			str[i] -= 0x20;
+	}
 }
