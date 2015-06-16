@@ -52,8 +52,8 @@ int main( int argc, char **argv )
 	mem.Set_Memory_Size( 16 );
 	mem.Allocate_Memory();
 	mem.put4( 0, 0x44434241 );
-	mem.put1( 8, 0xAA );
 	mem.put2( 4, 0xDEAD );
+	mem.put1( 8, 0xAA );	
 	mem.put4( 12, 0x44434241 );
 	mem.outHex( mem.get4( 0 ));
 
@@ -63,7 +63,13 @@ int main( int argc, char **argv )
 	To_Upper( s );
 	cout << s << endl;
 	mem.load( "tmp/tmp.hex" );
+
+
+	gvm.load( "tmp/tmp.hex" );
+	
 	gvm.cycle();
+
+
 /*	graph g[MAXN*MAXM];
 	
 	
@@ -132,7 +138,7 @@ void Get_Build_Number( )
 ///////////////////////////////////////////////////////////////////////////////
 void To_Upper( string &str )
 {
-	for ( int i = 0; i < str.length(); ++i )
+	for ( int i = 0; i < (int) str.length(); ++i )
 	{
 		if ( str[i] >= 'a' && str[i] <= 'z' )
 			str[i] -= 0x20;

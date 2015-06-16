@@ -42,7 +42,7 @@ bool GVM_Memory::Allocate_Memory()
 	// initialize
 	for ( int i = 0; i < this->size; ++i )
 	{
-		this->ram[i] = 3;// 0xFF;
+		this->ram[i] = NOOP;
 	}
 
 	return true;
@@ -178,7 +178,7 @@ bool GVM_Memory::load( std::string filename )
 
 	fclose( fp );
 
-	this->coredump_txt( "test.hex" );
+	return true;
 }
 
 

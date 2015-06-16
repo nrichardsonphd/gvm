@@ -5,6 +5,8 @@
 #include <iostream>
 using namespace std;
 
+#include "gvm_opcodes.h"
+
 class GVM_Memory
 {
 	public:
@@ -29,7 +31,7 @@ class GVM_Memory
 		void outHex( unsigned int );
 	private:
 		unsigned char *ram;
-		unsigned int size;
+		int size;
 
 };
 

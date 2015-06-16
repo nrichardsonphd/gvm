@@ -59,7 +59,7 @@
 #define	TNZF	0x
 
 #define	DUMP	0x
-#define	NOOP	0x
+#define	NOOP	0xFF
 //#define		0x
 
 

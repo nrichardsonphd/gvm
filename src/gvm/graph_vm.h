@@ -6,6 +6,8 @@
 #include "gvm_opcodes.h"
 #include "gvm_memory.h"
 
+// may need to deal with nauty here
+
 
 class Graph_VM
 {
@@ -17,7 +19,7 @@ class Graph_VM
 		float real( unsigned int );
 		unsigned int unreal( float );
 
-		unsigned int next1(); 
+		unsigned int next1();
 		unsigned int next2();
 		unsigned int next4();
 
@@ -34,10 +36,10 @@ class Graph_VM
 
 		bool done;										///< check program finished
 		
-		GVM_Memory prgm;								///< Instruction set for program
 		GVM_Memory RAM;									///< RAM for virtual machine
 		std::stack<unsigned int> Stack;					///< stack for memory
 		
+		void initialize();
 };
 
 #endif	// GRAPH_VM
