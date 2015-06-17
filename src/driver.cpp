@@ -27,6 +27,7 @@ using namespace std;
 
 void Title_Screen();			///< Title screen for startup
 void Get_Build_Number();		///< Find the Build number for Git
+void Get_Version_Number();		///< Find the version number
 void To_Upper( string &str );	///< Convert string to upper case
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -58,7 +59,7 @@ int main( int argc, char **argv )
 	mem.outHex( mem.get4( 0 ));
 
 	int *tmp = new int, *tmp2;
-	*tmp = 13;
+	*tmp = 0xff;
 
 	cout << std::hex << "*: " << tmp << std::dec << "\tval: " << *tmp << endl;
 	mem.put4( 8, tmp );
@@ -69,7 +70,7 @@ int main( int argc, char **argv )
 	delete tmp;
 
 	mem.coredump( "tmp/tmp.hex" );
-	string s = "soME CaSesS";
+	string s = "soME CaSesS123";
 	cout << s << endl;
 	To_Upper( s );
 	cout << s << endl;
@@ -106,7 +107,8 @@ void Title_Screen()
 	
 	const char *ts = "Build date: " __DATE__ "\t\t\t   Build Time: " __TIMESTAMP__;
 	cout << ts << endl;
-	cout << "Build Hash ID: ";
+
+	Get_Version_Number();
 	Get_Build_Number( );
 	cout << endl;
 
@@ -119,6 +121,7 @@ void Title_Screen()
 ///////////////////////////////////////////////////////////////////////////////
 void Get_Build_Number( )
 {
+	cout << "\tBuild Hash ID: ";
 	FILE *fp;
 	char *build_number = new char[128];
 	
@@ -140,6 +143,19 @@ void Get_Build_Number( )
 		cout << build_number[i++];
 	}
 	while ( build_number[i] != '\n' );
+	
+	fclose( fp );
+	
+}
+
+void Get_Version_Number()
+{
+	cout << "Version ";
+	FILE *fp = fopen( "version_no.txt", "r" ); 
+	char version[32];
+	fscanf( fp, "%s", version );
+	fclose( fp );
+	cout << version;
 	
 }
 

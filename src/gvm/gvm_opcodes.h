@@ -1,11 +1,11 @@
 // math
-#define	INC		0x
-#define	DEC		0x
-#define	ADD		0x44
-#define	SUB		0x
-#define	MUL		0x
-#define	IDIV	0x		// integer division
-#define	MOD		0x
+#define	INC		0x01
+#define	DEC		0x02
+#define	ADD		0x03
+#define	SUB		0x04
+#define	MUL		0x05
+#define	IDIV	0x06		// integer division
+#define	MOD		0x07
 
 #define	FMOD	0x		// float modulus
 #define	FADD	0x
@@ -24,7 +24,7 @@
 #define	INT		0x
 
 #define	DROP	0x
-#define	SWAP	0x
+#define	SWAP	0x11
 #define	JMP		0x
 #define	JMPR	0x		// relative jump
 #define	JMPD	0x		// direct jump
@@ -32,14 +32,14 @@
 //#define		0x
 
 // I/O
-#define	OUTCH	0x
-#define	OUTI	0x
-#define	OUTF	0x
-#define	OUTS	0x
-#define	INI		0x
-#define	INF		0x
-#define	INS		0x
-#define	INCH	0x
+#define	OUTCH	0x12
+#define	OUTI	0x13
+#define	OUTF	0x14
+#define	OUTS	0x15
+#define	INI		0x16
+#define	INF		0x17
+#define	INS		0x18
+#define	INCH	0x19
 //#define		0x
 //#define		0x
 
@@ -57,6 +57,24 @@
 #define	TNPF	0x
 #define	TNNF	0x
 #define	TNZF	0x
+
+
+// graphs
+#define ADDE
+#define DELE
+#define ADDV
+#define DELV
+#define ADDG
+#define REMG
+#define CONTE
+#define SUBDE
+#define COEXT
+#define JOIN
+
+#define UNION
+#define INTERSECT
+#define COMPL
+
 
 #define	DUMP	0x
 #define	NOOP	0xFF

@@ -21,31 +21,23 @@ void GVM_Memory::Set_Memory_Size( unsigned int max_size )
 	this->Allocate_Memory();
 }
 
+
 bool GVM_Memory::Allocate_Memory()
 {
-	// delete old memory
-	if ( this->ram != NULL )
-	{
-		delete [] this->ram;
-	}
-
 	// allocate
-	this->ram = new unsigned char[this->size];
+	this->ram.resize( this->size );
+	this->Clear_Memory();
 
-	// confirm allocation
-	if ( this->ram == NULL )
-	{
-		cout << "Error allocating memory" << endl;
-		return false;
-	}
+	return true;
+}
 
+void GVM_Memory::Clear_Memory()
+{
 	// initialize
 	for ( int i = 0; i < this->size; ++i )
 	{
 		this->ram[i] = NOOP;
 	}
-
-	return true;
 }
 
 void GVM_Memory::put1( unsigned int address, unsigned int value )
@@ -178,11 +170,12 @@ bool GVM_Memory::load( std::string filename )
 
 	this->Allocate_Memory();
 	int pos = 0;
+	c = fgetc( fp );
 
 	do
 	{
-		c = fgetc( fp );
 		this->put1( pos++, c );
+		c = fgetc( fp );
 	}
 	while ( !feof( fp ) );
 
