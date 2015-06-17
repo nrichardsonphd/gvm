@@ -7,11 +7,12 @@
 #define	IDIV	0x06		// integer division
 #define	MOD		0x07
 
-#define	FMOD	0x		// float modulus
-#define	FADD	0x
-#define	FSUB	0x
-#define	FMUL	0x
-#define	FDIV	0x		// float division
+
+#define	FADD	0x0a
+#define	FSUB	0x0b
+#define	FMUL	0x0c
+#define	FDIV	0x0d		// float division
+#define	FMOD	0x0e		// float modulus
 
 #define	NEG		0x
 #define	NOT		0x
@@ -28,6 +29,19 @@
 #define	JMP		0x
 #define	JMPR	0x		// relative jump
 #define	JMPD	0x		// direct jump
+
+#define PUSH0
+#define PUSH1
+#define PUSH2
+#define PUSH3
+#define POP0
+#define POP1
+#define POP2
+#define POP3
+
+#define LOADD		// load direc
+#define LOADI		// load indirect
+#define LOADR		// load relative
 
 //#define		0x
 
@@ -58,22 +72,67 @@
 #define	TNNF	0x
 #define	TNZF	0x
 
+#define BYES		// branch yes
+#define BNO			// branch no
+
+#define JEZ			// jump equal to 0
+#define JNZ			// jump not 0
+#define JGZ			// jump greater than 0
+#define JLZ			// jump less than 0
+#define JNN			// jump not negative
+#define JNP			// jump not positive
+
 
 // graphs
-#define ADDE
-#define DELE
-#define ADDV
-#define DELV
-#define ADDG
-#define REMG
-#define CONTE
-#define SUBDE
-#define COEXT
-#define JOIN
+#define ADDE		// add edge to G
+#define DELE		// delete edge from G
+#define ADDV		// add vertex to G
+#define DELV		// delete vertex from G
+#define CONTE		// contract edge
+#define SUBDE		// subdivide edge
+#define COEXT		// coextend edge	*creates a family of graphs
+#define JOIN		// join two graphs
+#define UNIONS		// union two sets
+#define INTERSECTS	// intersect two sets
+#define UNIONG		// union two graphs
+#define INTERSECTG	// intersect two graphs
+#define DUNIONG		// disjoint union two graphs
 
-#define UNION
-#define INTERSECT
-#define COMPL
+#define COMPL		// edge complement graph
+#define CANONG		// canonize graph
+#define DEGREE		// degree of vertex
+#define INDUCEG		// induce subgraph
+
+#define YDELTA		// Y-delta transformation
+#define DELTAY		// Delta-Y transformation
+
+#define TRIM		// trim graph	d(v) =/= 1
+#define SMOOTH		// smooth graph d(v) =/= 2
+#define TSMTH		// trim and smoot	d(G) >= 3
+
+// comparisons
+// subgraph comparisons labeling
+#define PSUBGRAPH
+#define SUBGRAPH
+#define PSUPGRAPH
+#define SUPGRAPH
+
+// subgraph comparisons isomorphic
+#define PSUBGRAPHI	
+#define SUBGRAPHI
+#define PSUPGRAPHI
+#define SUPGRAPHI
+
+#define EQL
+#define NEQ
+#define ISO
+
+// sets
+#define IN
+#define NOTIN
+
+#define ADDG		// add graph to class
+#define REMG		// remove graph from class
 
 
 #define	DUMP	0x
