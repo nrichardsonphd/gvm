@@ -57,6 +57,17 @@ int main( int argc, char **argv )
 	mem.put4( 12, 0x44434241 );
 	mem.outHex( mem.get4( 0 ));
 
+	int *tmp = new int, *tmp2;
+	*tmp = 13;
+
+	cout << std::hex << "*: " << tmp << std::dec << "\tval: " << *tmp << endl;
+	mem.put4( 8, tmp );
+
+	tmp2 = mem.get4_ptr( 8 );
+	
+	cout << std::hex << "*: " << tmp2 << std::dec << "\tval: " << *tmp2 << endl;
+	delete tmp;
+
 	mem.coredump( "tmp/tmp.hex" );
 	string s = "soME CaSesS";
 	cout << s << endl;

@@ -65,6 +65,11 @@ void GVM_Memory::put4( unsigned int address, unsigned int value )
 	this->put2( address+2, value >> 16 );
 }
 
+void GVM_Memory::put4( unsigned int address, int *value )
+{
+	this->put4( address, (unsigned int) value );
+}
+
 unsigned int GVM_Memory::get1( unsigned int address )
 {
 	unsigned int ret = this->ram[address];
@@ -81,6 +86,11 @@ unsigned int GVM_Memory::get4( unsigned int address )
 {
 	unsigned int ret = get2( address ) | ( get2( address + 2 ) << 16 );
 	return ret;
+}
+
+int *GVM_Memory::get4_ptr( unsigned int address )
+{
+	return (int *) this->get4( address );
 }
 
 void GVM_Memory::coredump_txt( std::string filename )
