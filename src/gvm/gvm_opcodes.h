@@ -1,89 +1,132 @@
+#ifndef GVM_OPCODES_H
+#define GVM_OPCODES_H
+
+// Operations take 1 or 2 arguments
+//	OP SRC DEST
+//	OP TOP_OF_STACK
+//	T/F operations place 
+//		0x00 on top FALSE
+//		0xFF on top TRUE
+
 // math
-#define	INC		0x01
-#define	DEC		0x02
-#define	ADD		0x03
-#define	SUB		0x04
-#define	MUL		0x05
-#define	IDIV	0x06		// integer division
-#define	MOD		0x07
+#define	INC			0x01		
+#define	DEC			0x02		
+#define	FLT			0x03			// make integer to float
+#define	INT			0x04			// make float to integer
+
+// integer specific
+#define	IADD		0x10
+#define	ISUB		0x11
+#define	IMUL		0x12
+#define	IDIV		0x13			// integer division
+#define	IMOD		0x14
+#define	INEG		0x15			// negate top of stack
+
+// real specific
+#define	FADD		0x16
+#define	FSUB		0x17
+#define	FMUL		0x18
+#define	FDIV		0x19			// float division
+#define	FMOD		0x1a			// float modulus
+#define	FNEG		0x1b			// negate top of stack
+
+// bitwise operators
+#define	NOT			0x20			
+#define	AND			0x21			
+#define	OR			0x22			
+#define	XOR			0x23			
+#define	COPY		0x24			// copy src, dest
+
+// standard I/O
+#define	OUTI		0x30			// integer
+#define	OUTF		0x31			// float
+#define	OUTCH		0x32			// character
+#define	OUTS		0x33			// string
+
+#define	INI			0x34			// integer
+#define	INF			0x35			// float
+#define	INCH		0x36			// char
+#define	INS			0x37			// string
+
+// Machine Operations
+// use R0 - R3, IR, PC, memory
+#define MOV			0x40			// src, dest
+#define LOADD		0x41			// load direct
+#define LOADI		0x42			// load indirect
+#define LOADR		0x43			// load relative
 
 
-#define	FADD	0x0a
-#define	FSUB	0x0b
-#define	FMUL	0x0c
-#define	FDIV	0x0d		// float division
-#define	FMOD	0x0e		// float modulus
+// Stack Related
+#define	DROP		0x44			// drop top of stack
+#define	SWAP		0x45			// swap top two stack elements
 
-#define	NEG		0x
-#define	NOT		0x
-#define	AND		0x
-#define	OR		0x
-#define	COPY	0x
-#define	XOR		0x
-#define	HALT	0x
-#define	FLT		0x
-#define	INT		0x
+// registers R0-R3		
+// push register on top of stack
+#define PUSH0		0x50
+#define PUSH1		0x51
+#define PUSH2		0x52
+#define PUSH3		0x53
 
-#define	DROP	0x
-#define	SWAP	0x11
-#define	JMP		0x
-#define	JMPR	0x		// relative jump
-#define	JMPD	0x		// direct jump
-
-#define PUSH0
-#define PUSH1
-#define PUSH2
-#define PUSH3
-#define POP0
-#define POP1
-#define POP2
-#define POP3
-
-#define LOADD		// load direc
-#define LOADI		// load indirect
-#define LOADR		// load relative
-
-//#define		0x
-
-// I/O
-#define	OUTCH	0x12
-#define	OUTI	0x13
-#define	OUTF	0x14
-#define	OUTS	0x15
-#define	INI		0x16
-#define	INF		0x17
-#define	INS		0x18
-#define	INCH	0x19
-//#define		0x
-//#define		0x
-
+// pop top of stack to register
+#define POP0		0x54
+#define POP1		0x55
+#define POP2		0x56
+#define POP3		0x57
 
 //logical
-#define	TPS		0x
-#define	TNG		0x
-#define	TZE		0x
-#define	TNP		0x
-#define	TNN		0x
-#define	TNZ		0x
-#define	TPSF	0x
-#define	TNGF	0x
-#define	TZEF	0x
-#define	TNPF	0x
-#define	TNNF	0x
-#define	TNZF	0x
+// test top of stack and replace TRUE/FALSE on top, stack is popped when tested
+#define	TPS			0x60			// test positive
+#define	TNG			0x61			// test negative
+#define	TZE			0x62			// test zero
+#define	TNP			0x63			// test not positive
+#define	TNN			0x64			// test	not negative
+#define	TNZ			0x65			// test not zero
 
-#define BYES		// branch yes
-#define BNO			// branch no
+// float tests
+#define	TPSF		0x66			// test positive
+#define	TNGF		0x67			// test negative
+#define	TZEF		0x68			// test zero
+#define	TNPF		0x69			// test not positive
+#define	TNNF		0x6a			// test	not negative
+#define	TNZF		0x6b			// test not zero
 
-#define JEZ			// jump equal to 0
-#define JNZ			// jump not 0
-#define JGZ			// jump greater than 0
-#define JLZ			// jump less than 0
-#define JNN			// jump not negative
-#define JNP			// jump not positive
+// conditional jump, check top of stack TRUE/FALSE
+#define BYES		0x70			// branch yes
+#define BNO			0x71			// branch no
+
+// normal jump
+#define	JMP			0x72
+#define	JMPR		0x73			// relative jump
+#define	JMPD		0x74			// direct jump
 
 
-// graphs
+
+// Graph stuff is below
+
+
+/*
+// Only 3 types of sets allowed.
+//	1. Class - set of graphs
+//	2. Vertex set
+//	3. Edge set
+//	A graph contains 1 edgeset and 1 vertex set
+// sets
+#define IN
+#define NOTIN
+#define ADDG		// add graph to class
+#define REMG		// remove graph from class
+
+
+
+// output for graphs
+#define OUTG6			// g6 format
+#define OUTADJ			// adjacency matrix
+#define OUTEL			// edge list
+
+// input for graphs
+#define ING6
+
+// graphs specific
 #define ADDE		// add edge to G
 #define DELE		// delete edge from G
 #define ADDV		// add vertex to G
@@ -110,7 +153,7 @@
 #define SMOOTH		// smooth graph d(v) =/= 2
 #define TSMTH		// trim and smoot	d(G) >= 3
 
-// comparisons
+// graph comparisons
 // subgraph comparisons labeling
 #define PSUBGRAPH
 #define SUBGRAPH
@@ -127,17 +170,20 @@
 #define NEQ
 #define ISO
 
-// sets
-#define IN
-#define NOTIN
-
-#define ADDG		// add graph to class
-#define REMG		// remove graph from class
 
 
-#define	DUMP	0x
-#define	NOOP	0xFF
-//#define		0x
+*/
 
 
-//
+
+
+
+
+// Final machine opcodes
+#define ERR		0xFC		// program error ( exit )
+#define	HALT	0xFD		// end of program
+#define	DUMP	0xFE		// core dump
+#define	NOOP	0xFF		// no operation to be done
+
+
+#endif	// GVM_OPCODES
