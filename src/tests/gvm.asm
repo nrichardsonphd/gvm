@@ -1,0 +1,3 @@
+LOAD 5
+LOAD 8
+ADD

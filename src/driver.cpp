@@ -20,7 +20,7 @@ using namespace std;
 #include "parser.h"
 
 #include "graph_vm.h"
-
+#include "gvm_asm.h"
 #define MAXN 128
 
 //#include "nauty.h"
@@ -81,6 +81,9 @@ int main( int argc, char **argv )
 	
 	gvm.cycle();
 
+	GVM_ASM gvm_asm;
+
+	gvm_asm.convert( "src/tests/gvm.asm", "src/tests/gvm.x" );
 
 /*	graph g[MAXN*MAXM];
 	
@@ -106,7 +109,7 @@ void Title_Screen()
 	cout << string( 79, '=' ) << "\n"; 
 	
 	const char *ts = "Build date: " __DATE__ "\t\t\t   Build Time: " __TIMESTAMP__;
-	cout << ts << endl;
+	cout <<  ts << endl;
 
 	Get_Version_Number();
 	Get_Build_Number( );

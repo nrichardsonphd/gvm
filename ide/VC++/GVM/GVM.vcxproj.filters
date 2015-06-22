@@ -16,6 +16,9 @@
     <Filter Include="GVM">
       <UniqueIdentifier>{ac354454-eca2-418d-a1d8-4e5e90acf52a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GVM_ASM">
+      <UniqueIdentifier>{970c15c1-75ec-4125-a2b1-c55bc35d2e43}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\driver.cpp" />
@@ -34,10 +37,16 @@
     <ClCompile Include="..\..\..\src\gvm\gvm_memory.cpp">
       <Filter>GVM</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\gvm\gvm_asm.cpp">
+      <Filter>GVM</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\..\src\code_std.txt">
       <Filter>Code Standards</Filter>
+    </Text>
+    <Text Include="..\..\..\src\gvm\opcodes.txt">
+      <Filter>GVM code</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
@@ -45,6 +54,9 @@
       <Filter>GVM code</Filter>
     </None>
     <None Include="..\..\..\src\tests\code.gvm">
+      <Filter>GVM code</Filter>
+    </None>
+    <None Include="..\..\..\src\tests\gvm.asm">
       <Filter>GVM code</Filter>
     </None>
   </ItemGroup>
@@ -74,6 +86,9 @@
       <Filter>GVM</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\gvm\gvm_memory.h">
+      <Filter>GVM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\gvm\gvm_asm.h">
       <Filter>GVM</Filter>
     </ClInclude>
   </ItemGroup>

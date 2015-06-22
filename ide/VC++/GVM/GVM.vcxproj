@@ -38,18 +38,27 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ExecutablePath>C:\Users\richardsonn\Documents\GitHub\gvm\obj;$(ExecutablePath)</ExecutablePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>C:\Users\richardsonn\Documents\GitHub\gvm\src;C:\Users\richardsonn\Documents\GitHub\gvm\src\interpreter;C:\Users\richardsonn\Documents\GitHub\gvm\src\gvm;C:\Users\richardsonn\Documents\GitHub\gvm\lib\nauty25r9;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MinimalRebuild>true</MinimalRebuild>
+      <ForcedIncludeFiles>
+      </ForcedIncludeFiles>
+      <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
     </Link>
+    <PreBuildEvent>
+      <Command>copy /b ../../../src/driver.cpp driver.cpp</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -68,6 +77,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\src\driver.cpp" />
     <ClCompile Include="..\..\..\src\gvm\graph_vm.cpp" />
+    <ClCompile Include="..\..\..\src\gvm\gvm_asm.cpp" />
     <ClCompile Include="..\..\..\src\gvm\gvm_memory.cpp" />
     <ClCompile Include="..\..\..\src\interpreter\parser.cpp" />
     <ClCompile Include="..\..\..\src\interpreter\scanner.cpp" />
@@ -75,13 +85,16 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\..\src\code_std.txt" />
+    <Text Include="..\..\..\src\gvm\opcodes.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\src\tests\code.gvm" />
+    <None Include="..\..\..\src\tests\gvm.asm" />
     <None Include="..\..\..\src\tests\tokens.gvm" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\gvm\graph_vm.h" />
+    <ClInclude Include="..\..\..\src\gvm\gvm_asm.h" />
     <ClInclude Include="..\..\..\src\gvm\gvm_memory.h" />
     <ClInclude Include="..\..\..\src\gvm\gvm_opcodes.h" />
     <ClInclude Include="..\..\..\src\interpreter\gvm_types.h" />

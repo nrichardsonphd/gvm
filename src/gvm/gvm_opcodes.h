@@ -7,6 +7,7 @@
 //	T/F operations place 
 //		0x00 on top FALSE
 //		0xFF on top TRUE
+//	ERR	An error has occurred running the program, not to be used in the program
 
 // math
 #define	INC			0x01		
@@ -51,29 +52,30 @@
 // Machine Operations
 // use R0 - R3, IR, PC, memory
 #define MOV			0x40			// src, dest
-#define LOADD		0x41			// load direct
-#define LOADI		0x42			// load indirect
-#define LOADR		0x43			// load relative
-
+#define LOAD		0x48				// load immediate
+#define LOADD		0x41			// load direct, direct addressing of executable
+#define LOADI		0x42			// load indirect, memory address pointer to data
+#define LOADRD		0x43			// load register direct
+#define LOADRI		0x4a				/// load register indirect
 
 // Stack Related
-#define	DROP		0x44			// drop top of stack
-#define	SWAP		0x45			// swap top two stack elements
+#define	DROP		0x50			// drop top of stack
+#define	SWAP		0x51			// swap top two stack elements
 
 // registers R0-R3		
 // push register on top of stack
-#define PUSH0		0x50
-#define PUSH1		0x51
-#define PUSH2		0x52
-#define PUSH3		0x53
+#define PUSH0		0x52
+#define PUSH1		0x53
+#define PUSH2		0x54
+#define PUSH3		0x55
 
 // pop top of stack to register
-#define POP0		0x54
-#define POP1		0x55
-#define POP2		0x56
-#define POP3		0x57
+#define POP0		0x56
+#define POP1		0x57
+#define POP2		0x58
+#define POP3		0x59
 
-//logical
+//logical	
 // test top of stack and replace TRUE/FALSE on top, stack is popped when tested
 #define	TPS			0x60			// test positive
 #define	TNG			0x61			// test negative

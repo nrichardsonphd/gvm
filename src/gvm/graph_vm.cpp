@@ -152,7 +152,7 @@ void Graph_VM::cycle()
 		case MOV:
 		case LOADD:
 		case LOADI:
-		case LOADR:
+	//	case LOADR:
 		case JMP:
 		case JMPD:		
 		case JMPR:
@@ -167,6 +167,7 @@ void Graph_VM::cycle()
 		case TNP:
 			this->sw_logical_int_op( );
 			break;
+
 		case TPSF:
 		case TNGF:
 		case TZEF:
