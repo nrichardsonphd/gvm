@@ -11,7 +11,7 @@
 
 // math
 #define	INC			0x01		
-#define	DEC			0x02		
+#define	DEC			0x02 		
 #define	FLT			0x03			// make integer to float
 #define	INT			0x04			// make float to integer
 

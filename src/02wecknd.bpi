@@ -109,7 +109,7 @@ void Title_Screen()
 	cout << "Graph Virtual Machine\t\t    GVM    \t\tDr. Nicholas Richardson" << endl;
 	cout << string( 79, '=' ) << "\n"; 
 	
-	const char *ts = "Build date: " __DATE__ "\t\t\t\t\t   Build Time: " __TIME__;
+	const char *ts = "Build date: " __DATE__ "\t\t\t   Build Time: " __TIME__;
 	cout <<  ts << endl;
 
 	Get_Version_Number();
@@ -117,6 +117,7 @@ void Title_Screen()
 	cout << endl;
 
 	time_t t = time(0);
+	//time( &t );
 	cout << "Runtime: ";
 	cout << localtime( &t )->tm_mon + 1 << "-" << localtime( &t )->tm_mday << "-" << localtime( &t )->tm_year + 1900 << " at ";
 	cout << localtime( &t )->tm_hour << ":" << localtime( &t )->tm_min << ":" << localtime( &t )->tm_sec << endl;
