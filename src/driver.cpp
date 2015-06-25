@@ -113,10 +113,6 @@ void Title_Screen()
 	Update_Version_Number();
 	Get_Run_Time();
 
-	
-
-
-
 	cout << string(79,'=') << endl << endl;
 }
 
@@ -126,11 +122,9 @@ void Title_Screen()
 ///////////////////////////////////////////////////////////////////////////////
 char *Get_Build_Number( )
 {
-	cout << "\tBuild Hash ID: ";
 	FILE *fp;
 	char *build_number = new char[128];
 	
-
 	if ( fp = fopen( "./.git/refs/heads/master", "r" ) )
 	{
 		fgets( build_number, 128, fp );
@@ -141,16 +135,7 @@ char *Get_Build_Number( )
 		build_number = "000-00-0000";
 	}
 
-	int i = 0;
-
-	do
-	{
-		cout << build_number[i++];
-	}
-	while ( build_number[i] != '\n' );
-	
 	fclose( fp );
-	cout << endl;
 	
 	return build_number;
 }
@@ -195,10 +180,12 @@ void Update_Version_Number()
 		commit++;
 		build = 0;
 	}
-	else
-		cout << "leave commit alone";
-	
 
+	cout << version << "." << revision << "." << commit << ":" << build;
+	commit_hash.pop_back();		// remove newline char
+	cout << "\t   Build Hash: " << commit_hash << endl;
+	
+	// check to update version numbering
 	time_t t = time( 0 );		// current time
 	const char *hh = &build_time.c_str()[0];		// hours
 	const char *mm = &build_time.c_str()[3];		// minutes
@@ -221,7 +208,7 @@ void Update_Version_Number()
 	}
 
 	
-	cout << version << "." << revision << "." << commit << ":" << build;
+	
 }
 
 
