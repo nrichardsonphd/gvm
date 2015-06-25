@@ -182,18 +182,16 @@ void Update_Version_Number()
 	} 
 	
 	cout << version << "." << revision << "." << commit << ":" << build;
-	commit_hash.pop_back();		// remove newline char
-	cout << "\t   Build Hash: " << Get_Build_Number( ) << endl;
+	
+	cout << "\t   Build Hash: " << Get_Build_Number( );
 	
 	// check to update version numbering
 	time_t t_build = Convert_Build_Time();
 	time_t t_run = time( 0 );							// current time
 
-	cout << "build: " << t_build << endl;
-	cout << "run:   " << t_run << endl;
 	// check difference between current time and build time, if < 10s adjust log file
 	//if ( localtime( &t )->tm_hour == atoi( hh ) && localtime( &t )->tm_min == atoi( mm ) && localtime( &t )->tm_sec - atoi( ss ) < 10 )
-	if ( t_run - t_build < 10   )
+	if ( t_run - t_build < 10 || commit_hash != Get_Build_Number() )
 	{
 		// This is likely the 1st run of the program, *** or same time as compiled on different day
 		// update version number file
@@ -231,21 +229,16 @@ time_t Convert_Build_Time()
 	int month, day, year;
 	const char months[] = "JanFebMarAprMayJunJulAugSepOctNovDec";
 	
-	cout << "********************" << endl;
-	cout << "Date: " << date << endl;
 	sscanf( date.c_str(), "%s %i %i", &monthstr, &day, &year );
 	month = (strstr( months, monthstr ) - months )/3 + 1;
-	cout << month<< "." << day << "." << year << endl;
 	
 	current.tm_mon = month-1;
 	current.tm_mday = day;
 	current.tm_year = year-1900;
 
-	cout << "Time: " << time << endl;
 	int hh, mm, ss;
 	sscanf( time.c_str(), "%i:%i:%i", &hh, &mm, &ss );
-	cout << hh << ":" << mm << ":" << ss << endl;
-
+	
 	current.tm_hour = hh;
 	current.tm_min = mm;
 	current.tm_sec = ss;
