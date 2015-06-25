@@ -187,13 +187,17 @@ void Update_Version_Number()
 	fclose( fp ); 
 
 	if ( commit_hash == "000-00-000" || commit_hash != Get_Build_Number() )
+	{
 		cout << "write new log commit";
+		fp = fopen( "log/commit_no.log", "w" );
+		fprintf( fp, "%s", Get_Build_Number() );
+		fclose( fp );
+		commit++;
+		build = 0;
+	}
 	else
 		cout << "leave commit alone";
-	fp = fopen( "log/commit_no.log", "w" );
-	fprintf( fp, "%s", Get_Build_Number() );
-	fclose( fp );
-
+	
 
 	time_t t = time( 0 );		// current time
 	const char *hh = &build_time.c_str()[0];		// hours
@@ -204,9 +208,6 @@ void Update_Version_Number()
 	if ( localtime( &t )->tm_hour == atoi( hh ) && localtime( &t )->tm_min == atoi( mm ) && localtime( &t )->tm_sec - atoi( ss ) < 10 )
 	{
 		// This is likely the 1st run of the program, *** or same time as compiled on different day
-		
-
-		
 		// update version number file
 		fp = fopen( "version_no.txt", "w" );
 		// add 1 to the build number
