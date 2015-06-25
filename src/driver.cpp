@@ -190,7 +190,6 @@ void Update_Version_Number()
 	time_t t_run = time( 0 );							// current time
 
 	// check difference between current time and build time, if < 10s adjust log file
-	//if ( localtime( &t )->tm_hour == atoi( hh ) && localtime( &t )->tm_min == atoi( mm ) && localtime( &t )->tm_sec - atoi( ss ) < 10 )
 	if ( t_run - t_build < 10 || commit_hash != Get_Build_Number() )
 	{
 		// This is likely the 1st run of the program, *** or same time as compiled on different day
