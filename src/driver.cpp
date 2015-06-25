@@ -172,8 +172,7 @@ void Update_Version_Number()
 	fclose( fp ); 
 
 	if ( commit_hash == "000-00-000" || commit_hash != Get_Build_Number() )
-	{
-		cout << "write new log commit";
+	{		
 		fp = fopen( "log/commit_no.log", "w" );
 		fprintf( fp, "%s", Get_Build_Number() );
 		fclose( fp );
