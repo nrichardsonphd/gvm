@@ -30,6 +30,7 @@ void Title_Screen();			///< Title screen for startup
 char *Get_Build_Number();		///< Find the Build number for Git
 void Get_Run_Time();			///< Get current run time
 void Update_Version_Number();	///< Automatically update version numbering system
+time_t Convert_Build_Time();	///< get time from __DATE__ and __TIME__
 void To_Upper( string &str );	///< Convert string to upper case
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -173,30 +174,27 @@ void Update_Version_Number()
 
 	if ( commit_hash == "000-00-000" || commit_hash != Get_Build_Number() )
 	{	
-		cout << "Update commit log" << endl;
 		fp = fopen( "log/commit_no.log", "w" );
 		fprintf( fp, "%s", Get_Build_Number() );
 		fclose( fp );
 		commit++;
 		build = 0;
 	} 
-	else
-		cout << "Not Updating commit log" << endl;
-
+	
 	cout << version << "." << revision << "." << commit << ":" << build;
 	commit_hash.pop_back();		// remove newline char
 	cout << "\t   Build Hash: " << Get_Build_Number( ) << endl;
 	
 	// check to update version numbering
-	time_t t = time( 0 );							// current time
-	const char *hh = &build_time.c_str()[0];		// hours
-	const char *mm = &build_time.c_str()[3];		// minutes
-	const char *ss = &build_time.c_str()[6];		// seconds
+	time_t t_build = Convert_Build_Time();
+	time_t t_run = time( 0 );							// current time
 
+	cout << "build: " << t_build << endl;
+	cout << "run:   " << t_run << endl;
 	// check difference between current time and build time, if < 10s adjust log file
-	if ( localtime( &t )->tm_hour == atoi( hh ) && localtime( &t )->tm_min == atoi( mm ) && localtime( &t )->tm_sec - atoi( ss ) < 10 )
+	//if ( localtime( &t )->tm_hour == atoi( hh ) && localtime( &t )->tm_min == atoi( mm ) && localtime( &t )->tm_sec - atoi( ss ) < 10 )
+	if ( t_run - t_build < 10   )
 	{
-		cout << "Updating version number file" << endl;
 		// This is likely the 1st run of the program, *** or same time as compiled on different day
 		// update version number file
 		fp = fopen( "version_no.txt", "w" );
@@ -205,13 +203,7 @@ void Update_Version_Number()
 		fprintf( fp, "%i.%i.%i:%i\n", version, revision, commit, build + 1 );
 		fclose( fp );
 	}
-	else
-	{
-		// do not update anything
-		cout << "Not updating version number file" << endl;
-	}
-
-	
+		
 	
 }
 
@@ -228,6 +220,38 @@ void Get_Run_Time()
 	if ( localtime( &t )->tm_min < 10 ) cout << "0"; cout << localtime( &t )->tm_min << ":";
 	if ( localtime( &t )->tm_sec < 10 ) cout << "0"; cout << localtime( &t )->tm_sec << endl;
 
+}
+
+time_t Convert_Build_Time()
+{
+	tm current = { 0 };
+	string date = __DATE__;
+	string time = __TIME__;
+	char monthstr[5];
+	int month, day, year;
+	const char months[] = "JanFebMarAprMayJunJulAugSepOctNovDec";
+	
+	cout << "********************" << endl;
+	cout << "Date: " << date << endl;
+	sscanf( date.c_str(), "%s %i %i", &monthstr, &day, &year );
+	month = (strstr( months, monthstr ) - months )/3 + 1;
+	cout << month<< "." << day << "." << year << endl;
+	
+	current.tm_mon = month-1;
+	current.tm_mday = day;
+	current.tm_year = year-1900;
+
+	cout << "Time: " << time << endl;
+	int hh, mm, ss;
+	sscanf( time.c_str(), "%i:%i:%i", &hh, &mm, &ss );
+	cout << hh << ":" << mm << ":" << ss << endl;
+
+	current.tm_hour = hh;
+	current.tm_min = mm;
+	current.tm_sec = ss;
+	current.tm_isdst = true;
+
+	return mktime(&current );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
