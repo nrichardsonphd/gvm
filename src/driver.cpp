@@ -178,7 +178,7 @@ void Update_Version_Number()
 		fclose( fp );
 		commit++;
 		build = 0;
-	}
+	} 
 
 	cout << version << "." << revision << "." << commit << ":" << build;
 	commit_hash.pop_back();		// remove newline char
