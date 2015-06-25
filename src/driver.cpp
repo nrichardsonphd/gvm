@@ -172,20 +172,23 @@ void Update_Version_Number()
 	fclose( fp ); 
 
 	if ( commit_hash == "000-00-000" || commit_hash != Get_Build_Number() )
-	{		
+	{	
+		cout << "Update commit log" << endl;
 		fp = fopen( "log/commit_no.log", "w" );
 		fprintf( fp, "%s", Get_Build_Number() );
 		fclose( fp );
 		commit++;
 		build = 0;
 	} 
+	else
+		cout << "Not Updating commit log" << endl;
 
 	cout << version << "." << revision << "." << commit << ":" << build;
 	commit_hash.pop_back();		// remove newline char
-	cout << "\t   Build Hash: " << commit_hash << endl;
+	cout << "\t   Build Hash: " << Get_Build_Number( ) << endl;
 	
 	// check to update version numbering
-	time_t t = time( 0 );		// current time
+	time_t t = time( 0 );							// current time
 	const char *hh = &build_time.c_str()[0];		// hours
 	const char *mm = &build_time.c_str()[3];		// minutes
 	const char *ss = &build_time.c_str()[6];		// seconds
@@ -193,6 +196,7 @@ void Update_Version_Number()
 	// check difference between current time and build time, if < 10s adjust log file
 	if ( localtime( &t )->tm_hour == atoi( hh ) && localtime( &t )->tm_min == atoi( mm ) && localtime( &t )->tm_sec - atoi( ss ) < 10 )
 	{
+		cout << "Updating version number file" << endl;
 		// This is likely the 1st run of the program, *** or same time as compiled on different day
 		// update version number file
 		fp = fopen( "version_no.txt", "w" );
@@ -204,6 +208,7 @@ void Update_Version_Number()
 	else
 	{
 		// do not update anything
+		cout << "Not updating version number file" << endl;
 	}
 
 	
