@@ -27,8 +27,9 @@ using namespace std;
 //#include "nauty.h"
 
 void Title_Screen();			///< Title screen for startup
-void Get_Build_Number();		///< Find the Build number for Git
-void Get_Version_Number();		///< Find the version number
+char *Get_Build_Number();		///< Find the Build number for Git
+void Get_Run_Time();			///< Get current run time
+void Update_Version_Number();	///< Automatically update version numbering system
 void To_Upper( string &str );	///< Convert string to upper case
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -108,18 +109,13 @@ void Title_Screen()
 {
 	cout << "Graph Virtual Machine\t\t    GVM    \t\tDr. Nicholas Richardson" << endl;
 	cout << string( 79, '=' ) << "\n"; 
+
+	Update_Version_Number();
+	Get_Run_Time();
+
 	
-	const char *ts = "Build date: " __DATE__ "\t\t\t\t\t   Build Time: " __TIME__;
-	cout <<  ts << endl;
 
-	Get_Version_Number();
-	Get_Build_Number(); 
-	cout << endl;
 
-	time_t t = time(0);
-	cout << "Runtime: ";
-	cout << localtime( &t )->tm_mon + 1 << "-" << localtime( &t )->tm_mday << "-" << localtime( &t )->tm_year + 1900 << " at ";
-	cout << localtime( &t )->tm_hour << ":" << localtime( &t )->tm_min << ":" << localtime( &t )->tm_sec << endl;
 
 	cout << string(79,'=') << endl << endl;
 }
@@ -128,7 +124,7 @@ void Title_Screen()
 ///		\details
 ///			Search git repository file structure to get build hash.
 ///////////////////////////////////////////////////////////////////////////////
-void Get_Build_Number( )
+char *Get_Build_Number( )
 {
 	cout << "\tBuild Hash ID: ";
 	FILE *fp;
@@ -154,18 +150,72 @@ void Get_Build_Number( )
 	while ( build_number[i] != '\n' );
 	
 	fclose( fp );
+	cout << endl;
 	
+	return build_number;
 }
 
-void Get_Version_Number()
+
+void Update_Version_Number()
 {
+	string build_date = __DATE__;
+	string build_time = __TIME__;
+	cout << "Build date: " << build_date << "\t\t\t\t\t   Build Time: " << build_time << endl;
+
+	// get current version number
 	cout << "Version ";
-	FILE *fp = fopen( "version_no.txt", "r" ); 
-	char version[32];
-	fscanf( fp, "%s", version );
+	FILE *fp = fopen( "version_no.txt", "r" );
+	int version, revision, commit, build;
+	fscanf( fp, "%i.%i.%i:%i", &version, &revision, &commit, &build );
 	fclose( fp );
-	cout << version;
 	
+	// check commit number
+	fp = fopen( "log/commit_no.log", "w" );
+	fprintf( fp, "%s", Get_Build_Number() );
+	fclose( fp );
+
+
+	time_t t = time( 0 );		// current time
+	const char *hh = &build_time.c_str()[0];		// hours
+	const char *mm = &build_time.c_str()[3];		// minutes
+	const char *ss = &build_time.c_str()[6];		// seconds
+
+	// check difference between current time and build time, if < 10s adjust log file
+	if ( localtime( &t )->tm_hour == atoi( hh ) && localtime( &t )->tm_min == atoi( mm ) && localtime( &t )->tm_sec - atoi( ss ) < 10 )
+	{
+		// This is likely the 1st run of the program, *** or same time as compiled on different day
+	
+
+		
+		// update version number file
+		fp = fopen( "version_no.txt", "w" );
+		// add 1 to the build number
+		// *** still need to figure out commit number
+		fprintf( fp, "%i.%i.%i:%i\n", version, revision, commit, build + 1 );
+		fclose( fp );
+	}
+	else
+	{
+		// do not update anything
+	}
+
+	
+	cout << version << "." << revision << "." << commit << ":" << build;
+}
+
+
+void Get_Run_Time()
+{
+	time_t t = time( 0 );
+	cout << "Runtime: ";
+	if ( localtime( &t )->tm_mon + 1 < 10 ) cout << "0"; cout << localtime( &t )->tm_mon + 1 << "-";
+	if ( localtime( &t )->tm_mday < 10 ) cout << "0"; cout << localtime( &t )->tm_mday << "-";
+	cout << localtime( &t )->tm_year + 1900 << " at ";
+
+	if ( localtime( &t )->tm_hour < 10 ) cout << "0"; cout << localtime( &t )->tm_hour << ":";
+	if ( localtime( &t )->tm_min < 10 ) cout << "0"; cout << localtime( &t )->tm_min << ":";
+	if ( localtime( &t )->tm_sec < 10 ) cout << "0"; cout << localtime( &t )->tm_sec << endl;
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////
